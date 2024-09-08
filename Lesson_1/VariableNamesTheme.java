@@ -1,8 +1,6 @@
 public class VariableNamesTheme {
     public static void main(String[] args) {
-        // ***********************************
-        // ***    1. Разные переменные     ***
-        // ***********************************
+        // 1. Разные переменные
         System.out.println("1. Разные переменные\n");
 
         // Цифра
@@ -18,7 +16,7 @@ public class VariableNamesTheme {
         System.out.println("Произведение цифр = " + productOfDigits);
 
         // Максимальное число
-        int maximumNumber = 2_147_483_647;
+        int maximumNumber = Integer.MAX_VALUE;
         System.out.println("Максимальное число = " + maximumNumber);
 
         // Количество десятков
@@ -117,9 +115,7 @@ public class VariableNamesTheme {
         int numbersPerRow = 10;
         System.out.println("Количество чисел в каждой строке = " + numbersPerRow);
 
-        // ************************************
-        // ***    2. Boolean-переменные     ***
-        // ************************************
+        // 2. Boolean-переменные
         System.out.println("\n2. Boolean-переменные\n");
 
         // Сотни равны?
@@ -158,9 +154,7 @@ public class VariableNamesTheme {
         boolean hasUniqueStrings = true;
         System.out.println("Имеются уникальные строки? = " + hasUniqueStrings);
 
-        // ******************************
-        // ***    3. Аббревиатуры     ***
-        // ******************************
+        // 3. Аббревиатуры
         System.out.println("\n3. Аббревиатуры\n");
 
         // Старый universally unique identifier
