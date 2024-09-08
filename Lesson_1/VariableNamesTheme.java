@@ -119,16 +119,16 @@ public class VariableNamesTheme {
         System.out.println("\n2. Boolean-переменные\n");
 
         // Сотни равны?
-        boolean areHundredsEqual = true;
-        System.out.println("Сотни равны? = " + areHundredsEqual);
+        boolean hasHundredsEqual = true;
+        System.out.println("Сотни равны? = " + hasHundredsEqual);
 
         // Компьютер включен?
         boolean isComputerOn = false;
         System.out.println("Компьютер включен? = " + isComputerOn);
 
         // Есть равные цифры?
-        boolean hasEqualDigits = true;
-        System.out.println("Есть равные цифры? = " + hasEqualDigits);
+        boolean hasDigitsEqual = true;
+        System.out.println("Есть равные цифры? = " + hasDigitsEqual);
 
         // Создано?
         boolean isCreated = true;
@@ -158,8 +158,8 @@ public class VariableNamesTheme {
         System.out.println("\n3. Аббревиатуры\n");
 
         // Старый universally unique identifier
-        String oldUUID = "550e8400-e29b-41d4-a716-446655440000";
-        System.out.println("Старый UUID = " + oldUUID);
+        String oldUuid = "550e8400-e29b-41d4-a716-446655440000";
+        System.out.println("Старый UUID = " + oldUuid);
 
         // Производитель оперативной памяти
         String ramManufacturer = "Kingston";
@@ -174,12 +174,12 @@ public class VariableNamesTheme {
         System.out.println("Протокол HTTP = " + httpProtocol);
 
         // Сокращенный uniform resource locator
-        String shortURL = "https://goo.su/J6Cf";
-        System.out.println("Сокращенный URL = " + shortURL);
+        String shortUrl = "https://goo.su/J6Cf";
+        System.out.println("Сокращенный URL = " + shortUrl);
 
         // Новый идентификатор клиента
-        String newClientID = "C123456789";
-        System.out.println("Новый Client ID = " + newClientID);
+        String newClientId = "C123456789";
+        System.out.println("Новый Client ID = " + newClientId);
 
         // American standard code for information interchange
         char asciiChar = 'A';

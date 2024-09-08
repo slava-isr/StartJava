@@ -26,10 +26,14 @@ public class VariablesTheme {
         // 2. Расчет стоимости товара со скидкой
         System.out.println("\n2. Расчет стоимости товара со скидкой\n");
 
-        double penPrice = 105.5, bookPrice = 235.83, discount = 0.11;
+        double penPrice = 105.5;
+        double bookPrice = 235.83;
+        double discount = 0.11;
+
         double costWithoutDiscount = penPrice + bookPrice;
         double discountAmount = costWithoutDiscount * discount;
         double costWithDiscount = costWithoutDiscount - discountAmount;
+
         System.out.println("Стоимость товаров без скидки: " + costWithoutDiscount);
         System.out.println("Сумма скидки: " + discountAmount);
         System.out.println("Стоимость товаров со скидкой: " + costWithDiscount);
@@ -97,6 +101,7 @@ public class VariablesTheme {
         char atSignSymbol = '@';
         char verticalBarSymbol = '|';
         char tildeSymbol = '~';
+
         System.out.println("Код символа: " + (byte) dollarSymbol + "\t\tСимвол: " + dollarSymbol);
         System.out.println("Код символа: " + (byte) asteriskSymbol + "\t\tСимвол: " + asteriskSymbol);
         System.out.println("Код символа: " + (byte) atSignSymbol + "\t\tСимвол: " + atSignSymbol);
@@ -106,7 +111,11 @@ public class VariablesTheme {
         // 7. Вывод в консоль ASCII-арт Дюка
         System.out.println("\n7. Вывод в консоль ASCII-арт Дюка\n");
 
-        char s1 = '/', s2 = '\\', s3 = '_', s4 = '(', s5 = ')';
+        char s1 = '/';
+        char s2 = '\\';
+        char s3 = '_';
+        char s4 = '(';
+        char s5 = ')';
 
         System.out.println("    " + s1 + s2);
         System.out.println("   " + s1 + "  " + s2);
@@ -138,6 +147,7 @@ public class VariablesTheme {
         int hours = totalSeconds / 3600;
         int minutes = (totalSeconds % 3600) / 60;
         int seconds = totalSeconds % 60;
+
         System.out.printf("%02d:%02d:%02d\n", hours, minutes, seconds);
 
         // 10. *Расчет стоимости товара со скидкой
