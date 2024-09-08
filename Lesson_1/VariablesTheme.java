@@ -78,9 +78,9 @@ public class VariablesTheme {
         System.out.println("\tНовые значения переменных: a = " + a + ", b = " + b);
 
         System.out.println("\nПерестановка с помощью арифметических операций:");
-        a = a + b;
+        a += b;
         b = a - b;
-        a = a - b;
+        a -= b;
         System.out.println("\tНовые значения переменных: a = " + a + ", b = " + b);
 
         System.out.println("\nПерестановка с помощью побитовой операции ^:");
