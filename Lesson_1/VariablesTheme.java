@@ -128,15 +128,15 @@ public class VariablesTheme {
 
         int number = 123;
         int hundreds = number / 100;
-        int tens = number % 100 / 10;
+        int tens = number / 10 % 10;
         int ones = number % 10;
         int sumOfDigits = hundreds + tens + ones;
         int productOfDigits = hundreds * tens * ones;
 
         System.out.println("Число " + number + " содержит:");
-        System.out.println("\tсотен - " + hundreds);
-        System.out.println("\tдесятков - " + tens);
-        System.out.println("\tединиц - " + ones);
+        System.out.println("\t- сотен = " + hundreds);
+        System.out.println("\t- десятков = " + tens);
+        System.out.println("\t- единиц = " + ones);
         System.out.println("Сумма разрядов = " + sumOfDigits);
         System.out.println("Произведение разрядов = " + productOfDigits);
 
