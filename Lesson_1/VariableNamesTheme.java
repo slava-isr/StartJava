@@ -1,6 +1,5 @@
 public class VariableNamesTheme {
     public static void main(String[] args) {
-        // 1. Разные переменные
         System.out.println("1. Разные переменные\n");
 
         // Цифра
@@ -8,20 +7,20 @@ public class VariableNamesTheme {
         System.out.println("Цифра = " + digit);
 
         // Сумма чисел
-        int sumOfNumbers = 13 + 7;
-        System.out.println("Сумма чисел = " + sumOfNumbers);
+        int sumNumbers = 13 + 7;
+        System.out.println("Сумма чисел = " + sumNumbers);
 
         // Произведение цифр
-        int productOfDigits = 6 * 6 * 6;
-        System.out.println("Произведение цифр = " + productOfDigits);
+        int productDigits = 6 * 6 * 6;
+        System.out.println("Произведение цифр = " + productDigits);
 
         // Максимальное число
-        int maximumNumber = Integer.MAX_VALUE;
-        System.out.println("Максимальное число = " + maximumNumber);
+        int maxNumber = Integer.MAX_VALUE;
+        System.out.println("Максимальное число = " + maxNumber);
 
         // Количество десятков
-        int numberOfTens = 9;
-        System.out.println("Количество десятков = " + numberOfTens);
+        int numberTens = 9;
+        System.out.println("Количество десятков = " + numberTens);
 
         // Вес собаки
         double dogWeight = 12.8;
@@ -48,8 +47,8 @@ public class VariableNamesTheme {
         System.out.println("Тип сообщения = " + messageType);
 
         // Число нулей
-        int numberOfZeros = 3;
-        System.out.println("Число нулей = " + numberOfZeros);
+        int numberZeros = 3;
+        System.out.println("Число нулей = " + numberZeros);
 
         // Уникальное число
         int uniqueNumber = 123456789;
@@ -84,16 +83,16 @@ public class VariableNamesTheme {
         System.out.println("Дата начала = " + startDate);
 
         // Окончание диапазона
-        int rangeEnd = 1000;
-        System.out.println("Окончание диапазона = " + rangeEnd);
+        int endRange = 1000;
+        System.out.println("Окончание диапазона = " + endRange);
 
         // Полное имя работника месяца
-        String employeeOfTheMonth = "Алексей Иванов";
-        System.out.println("Полное имя работника месяца = " + employeeOfTheMonth);
+        String employeeMonth = "Алексей Иванов";
+        System.out.println("Полное имя работника месяца = " + employeeMonth);
 
         // Заголовок электронной книги
-        String eBookTitle = "Программирование на Java";
-        System.out.println("Заголовок электронной книги = " + eBookTitle);
+        String ebookTitle = "Программирование на Java";
+        System.out.println("Заголовок электронной книги = " + ebookTitle);
 
         // Размер
         int size = 42;
@@ -115,20 +114,19 @@ public class VariableNamesTheme {
         int numbersPerRow = 10;
         System.out.println("Количество чисел в каждой строке = " + numbersPerRow);
 
-        // 2. Boolean-переменные
         System.out.println("\n2. Boolean-переменные\n");
 
         // Сотни равны?
-        boolean hasHundredsEqual = true;
-        System.out.println("Сотни равны? = " + hasHundredsEqual);
+        boolean hasEqualHundreds = true;
+        System.out.println("Сотни равны? = " + hasEqualHundreds);
 
         // Компьютер включен?
-        boolean isComputerOn = false;
-        System.out.println("Компьютер включен? = " + isComputerOn);
+        boolean isOnComputer = false;
+        System.out.println("Компьютер включен? = " + isOnComputer);
 
         // Есть равные цифры?
-        boolean hasDigitsEqual = true;
-        System.out.println("Есть равные цифры? = " + hasDigitsEqual);
+        boolean hasEqualDigits = true;
+        System.out.println("Есть равные цифры? = " + hasEqualDigits);
 
         // Создано?
         boolean isCreated = true;
@@ -147,8 +145,8 @@ public class VariableNamesTheme {
         System.out.println("Новое? = " + isNew);
 
         // Электронная почта действительная?
-        boolean isEmailValid = false;
-        System.out.println("Электронная почта действительная? = " + isEmailValid);
+        boolean isValidEmail = false;
+        System.out.println("Электронная почта действительная? = " + isValidEmail);
 
         // Имеются уникальные строки?
         boolean hasUniqueStrings = true;
@@ -178,8 +176,8 @@ public class VariableNamesTheme {
         System.out.println("Сокращенный URL = " + shortUrl);
 
         // Новый идентификатор клиента
-        String newClientId = "C123456789";
-        System.out.println("Новый Client ID = " + newClientId);
+        String newCid = "C123456789";
+        System.out.println("Новый Client ID = " + newCid);
 
         // American standard code for information interchange
         char asciiChar = 'A';

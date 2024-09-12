@@ -6,7 +6,6 @@ public class IfElseStatementTheme {
         System.out.println("1. Перевод псевдокода на язык Java\n");
 
         boolean isMale = true;
-
         if (!isMale) {
             System.out.println("В Летуаль сегодня скидки для тебя");
         } else {
@@ -14,7 +13,6 @@ public class IfElseStatementTheme {
         }
 
         byte age = 31;
-
         if (age > 18) {
             System.out.println("Ты взрослый, тебе уже можно!");
         } else {
@@ -22,18 +20,16 @@ public class IfElseStatementTheme {
         }
 
         double height = 1.78;
-
         if (height < 1.8) {
             System.out.println("Нет-нет, ты не гном, успокойся");
         } else {
             System.out.println("Ух ты, какой высокий!");
         }
 
-        char firstLetterOfName = "Viacheslav".charAt(0);
-
-        if (firstLetterOfName == 'M') {
+        char firstLetterName = "Viacheslav".charAt(0);
+        if (firstLetterName == 'M') {
             System.out.println("Может быть, ты Максим?");
-        } else if (firstLetterOfName == 'I') {
+        } else if (firstLetterName == 'I') {
             System.out.println("Может быть, тебя зовут Ира?");
         } else {
             System.out.println("Ты явно не Ира и не Максим...");
@@ -41,15 +37,15 @@ public class IfElseStatementTheme {
 
         System.out.println("\n2. Поиск большего числа\n");
 
-        int firstDigit = 7;
-        int secondDigit = 1;
+        int a = 123;
+        int b = 183;
 
-        if (firstDigit == secondDigit) {
-            System.out.printf("Числа %d и %d равны\n", firstDigit, secondDigit);
-        } else if (firstDigit > secondDigit) {
-            System.out.printf("Число %d больше %d\n", firstDigit, secondDigit);
+        if (a == b) {
+            System.out.printf("Числа %d и %d равны\n", a, b);
+        } else if (a > b) {
+            System.out.printf("Число %d больше %d\n", a, b);
         } else {
-            System.out.printf("Число %d меньше %d\n", firstDigit, secondDigit);
+            System.out.printf("Число %d меньше %d\n", a, b);
         }
 
         System.out.println("\n3. Проверка числа\n");
@@ -74,19 +70,16 @@ public class IfElseStatementTheme {
 
         System.out.println("\n4. Поиск одинаковых цифр в числах\n");
 
-        int firstNumber = 123;
-        int secondNumber = 123;
+        int firstHundreds = a / 100;
+        int firstTens = a / 10 % 10;
+        int firstOnes = a % 10;
 
-        int firstHundreds = firstNumber / 100;
-        int firstTens = firstNumber / 10 % 10;
-        int firstOnes = firstNumber % 10;
-
-        int secondHundreds = secondNumber / 100;
-        int secondTens = secondNumber / 10 % 10;
-        int secondOnes = secondNumber % 10;
+        int secondHundreds = b / 100;
+        int secondTens = b / 10 % 10;
+        int secondOnes = b % 10;
 
         if ((firstHundreds == secondHundreds) || (firstTens == secondTens) || (firstOnes == secondOnes)) {
-            System.out.printf("В цифрах %d и %d есть одинаковые:\n", firstNumber, secondNumber);
+            System.out.printf("В цифрах %d и %d есть одинаковые:\n", a, b);
 
             if (firstHundreds == secondHundreds) {
                 System.out.printf("\t- сотни равные %d\n", firstHundreds);
@@ -128,29 +121,45 @@ public class IfElseStatementTheme {
             interestOnDeposit = 0.05;
         }
 
-        double accrualAmount = depositAmount * interestOnDeposit;
-        double totalAmountWithPct = depositAmount + accrualAmount;
+        double interest = depositAmount * interestOnDeposit;
+        double totalAmountWithInterest = depositAmount + interest;
 
         System.out.println("Сумма вклада: " + depositAmount);
-        System.out.println("Сумма начисленного %: " + accrualAmount);
-        System.out.println("Итоговая сумма с %: " + totalAmountWithPct);
+        System.out.println("Сумма начисленного %: " + interest);
+        System.out.println("Итоговая сумма с %: " + totalAmountWithInterest);
 
         System.out.println("\n7. Определение оценки по предметам\n");
 
-        int historyPct = 59;
-        int programmingPct = 92;
-        int historyGrade = historyPct > 91 ? 5 : historyPct > 73 ? 4 : historyPct > 60 ? 3 : 2;
-        int programmingGrade = programmingPct > 91 ? 5 : programmingPct > 73 ? 4 : programmingPct > 60 ? 3 : 2;
+        int historyPercent = 59;
+        int programmingPercent = 92;
+
+        int historyGrade = 2;
+        if (historyPercent > 91) {
+            historyGrade = 5;
+        } else if (historyPercent > 73) {
+            historyGrade = 4;
+        } else if (historyPercent > 60) {
+            historyGrade = 3;
+        }
+
+        int programmingGrade = 2;
+        if (programmingPercent > 91) {
+            programmingGrade = 5;
+        } else if (programmingPercent > 73) {
+            programmingGrade = 4;
+        } else if (programmingPercent > 60) {
+            programmingGrade = 3;
+        }
 
         System.out.println("Оценки по предметам:");
         System.out.println("\t- История: " + historyGrade);
         System.out.println("\t- Программирование: " + programmingGrade);
 
         double averageGrade = (historyGrade + programmingGrade) / 2.0;
-        double averagePct = (historyPct + programmingPct) / 2.0;
+        double averagePercent = (historyPercent + programmingPercent) / 2.0;
 
         System.out.printf("Средний балл: %.2f\n", averageGrade);
-        System.out.printf("Средний процент: %.2f%%\n", averagePct);
+        System.out.printf("Средний процент: %.2f%%\n", averagePercent);
 
         System.out.println("\n8. Расчет годовой прибыли\n");
 
@@ -163,24 +172,24 @@ public class IfElseStatementTheme {
         System.out.println("\n9. *Расчет годовой прибыли\n");
 
         BigDecimal depositAmountBd = new BigDecimal("321123.59");
-        BigDecimal interestOnDepositBd;
+        BigDecimal interestOnDepositBd = new BigDecimal("0.07");
 
-        if (depositAmountBd.compareTo(new BigDecimal("300000")) > 0) {
+        if (depositAmountBd.compareTo(BigDecimal.valueOf(300000)) > 0) {
             interestOnDepositBd = new BigDecimal("0.1");
-        } else if (depositAmountBd.compareTo(new BigDecimal("100000")) < 0) {
+        } else if (depositAmountBd.compareTo(BigDecimal.valueOf(100000)) < 0) {
             interestOnDepositBd = new BigDecimal("0.05");
-        } else {
-            interestOnDepositBd = new BigDecimal("0.07");
         }
 
-        BigDecimal accrualAmountBd = depositAmountBd.multiply(interestOnDepositBd)
+        BigDecimal accrualAmountBd = depositAmountBd
+                .multiply(interestOnDepositBd)
                 .setScale(2, RoundingMode.HALF_UP);
-        BigDecimal totalAmountWithPctBd = depositAmountBd.add(accrualAmountBd)
+        BigDecimal totalAmountWithPercentBd = depositAmountBd
+                .add(accrualAmountBd)
                 .setScale(2, RoundingMode.HALF_UP);
 
         System.out.println("Сумма вклада: " + depositAmountBd);
         System.out.println("Сумма начисленного %: " + accrualAmountBd);
-        System.out.println("Итоговая сумма с %: " + totalAmountWithPctBd);
+        System.out.println("Итоговая сумма с %: " + totalAmountWithPercentBd);
 
         System.out.println("\n10. *Подсчет начисленных банком %\n");
 
@@ -190,9 +199,9 @@ public class IfElseStatementTheme {
         BigDecimal annualProfitBd = monthlyRevenueBd
                 .subtract(premisesRentalBd)
                 .subtract(productionCostBd)
-                .multiply(new BigDecimal("12"))
+                .multiply(BigDecimal.valueOf(12))
                 .setScale(2, RoundingMode.HALF_UP);
-        String numericSign = (annualProfitBd.compareTo(new BigDecimal("0")) > 0) ? "+" : "";
+        String numericSign = (annualProfitBd.compareTo(BigDecimal.ZERO) > 0) ? "+" : "";
 
         System.out.printf("Прибыль за год: %s%s руб.\n", numericSign, annualProfitBd);
     }
