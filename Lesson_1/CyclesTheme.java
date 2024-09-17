@@ -17,9 +17,8 @@ public class CyclesTheme {
         } while (counter <= endRange);
         System.out.print("В отрезке [" + startRange + ", " + endRange + "]");
         System.out.println(" сумма четных чисел = " + sumEvenNumbers + ", а нечетных = " + sumOddNumbers);
-        System.out.println();
 
-        System.out.println("2. Вывод чисел между min и max в порядке убывания");
+        System.out.println("\n2. Вывод чисел между min и max в порядке убывания");
 
         int a = 10;
         int b = 5;
@@ -34,10 +33,10 @@ public class CyclesTheme {
         }
 
         int max = a;
-        if (b > min) {
+        if (b > max) {
             max = b;
         }
-        if (c > min) {
+        if (c > max) {
             max = c;
         }
 
@@ -45,10 +44,8 @@ public class CyclesTheme {
         for (int i = max - 1; i > min; i--) {
             System.out.print(i + " ");
         }
-        System.out.println();
-        System.out.println();
 
-        System.out.println("3. Вывод реверсивного числа и суммы его цифр");
+        System.out.println("\n\n3. Вывод реверсивного числа и суммы его цифр");
 
         int number = 1234;
         int sumDigits = 0;
@@ -60,9 +57,8 @@ public class CyclesTheme {
             number /= 10;
         }
         System.out.println(", сумма цифр = " + sumDigits);
-        System.out.println();
 
-        System.out.println("4. Вывод чисел в несколько строк");
+        System.out.println("\n4. Вывод чисел в несколько строк");
 
         int columns = 5;
         for (int i = 1; i < 24; i++) {
@@ -75,13 +71,11 @@ public class CyclesTheme {
                 }
             }
         }
-        for (; columns > 0; columns--) {
+        for (; columns > 0 && columns != 5; columns--) {
             System.out.printf("%4d ", 0);
         }
-        System.out.println();
-        System.out.println();
 
-        System.out.println("5. Проверка количества двоек числа на четность/нечетность");
+        System.out.println("\n\n5. Проверка количества двоек числа на четность/нечетность");
 
         number = 3242592;
         int countTwos = 0;
@@ -91,8 +85,7 @@ public class CyclesTheme {
             number /= 10;
         }
         String evenOrOdd = (countTwos % 2 == 0) ? " четное" : " нечетное";
-        System.out.println(evenOrOdd + " (" + countTwos + ") количество двоек");
-        System.out.println();
+        System.out.println(evenOrOdd + " (" + countTwos + ") количество двоек\n");
 
         System.out.println("6. Вывод геометрических фигур");
 
@@ -131,9 +124,8 @@ public class CyclesTheme {
             }
             row = isTop ? row - 1 : row + 1;
         } while (row > 0);
-        System.out.println();
 
-        System.out.println("7. Отображение ASCII-символов");
+        System.out.println("\n7. Отображение ASCII-символов");
 
         System.out.printf("%s %11s %13s %n", "DECIMAL", "CHARACTER", "DESCRIPTION");
         for (char symbol = 33; symbol <= '0'; symbol += 2) {
@@ -143,9 +135,8 @@ public class CyclesTheme {
             if ((int) symbol % 2 != 0) symbol++;
             System.out.printf("%4d %10c            %-1s %n", (int) symbol, symbol, Character.getName(symbol));
         }
-        System.out.println();
 
-        System.out.println("8. Проверка, является ли число палиндромом");
+        System.out.println("\n8. Проверка, является ли число палиндромом");
 
         number = 1234321;
         int copyNumber = number;
@@ -156,9 +147,8 @@ public class CyclesTheme {
         }
         String palindromeOrNot = (copyNumber == reverseNumber) ? "палиндром" : "не палиндром";
         System.out.println("Число " + copyNumber + " - " + palindromeOrNot);
-        System.out.println();
 
-        System.out.println("9. Проверка, является ли число счастливым");
+        System.out.println("\n9. Проверка, является ли число счастливым");
 
         number = 123321;
         int leftHalfDigits = number / 1000;
@@ -177,9 +167,8 @@ public class CyclesTheme {
         System.out.println("Число " + number + " - " + luckyNumberOrNot);
         System.out.println("Сумма " + copyLeftHalfDigits + " = " + sumLeftHalfDigits);
         System.out.println("Сумма " + copyRightHalfDigits + " = " + sumRightHalfDigits);
-        System.out.println();
 
-        System.out.println("10. Вывод таблицы умножения Пифагора");
+        System.out.println("\n10. Вывод таблицы умножения Пифагора");
 
         for (int i = 1; i <= 9; i++) {
             if (i > 1) {
