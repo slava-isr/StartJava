@@ -1,7 +1,7 @@
 public class Wolf {
 
     String gender;
-    String alias;
+    String name;
     String color;
     float weight;
     short age;
