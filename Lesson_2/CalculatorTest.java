@@ -8,26 +8,49 @@ public class CalculatorTest {
         Calculator calculator = new Calculator();
         Scanner sc = new Scanner(System.in);
         do {
-            calculator.setFirstNumber(sc);
-            calculator.setOperator(sc);
-            calculator.setSecondNumber(sc);
+            System.out.print("\nВведите первое число: ");
+            calculator.setFirstNumber(inputNumber(sc));
+            System.out.print("Введите знак операции (+, -, *, /, ^, %): ");
+            calculator.setOperator(inputOperator(sc));
+            System.out.print("Введите второе число: ");
+            calculator.setSecondNumber(inputNumber(sc));
+            while (calculator.getOperator().equals("/") && calculator.getSecondNumber() == 0) {
+                System.out.println("Ошибка: деление на ноль запрещено");
+                System.out.print("Введите второе число: ");
+                calculator.setSecondNumber(inputNumber(sc));
+            }
             printFormattedResult(calculator);
         } while (!isExit(sc));
         sc.close();
     }
 
-    private static void printFormattedResult(Calculator calculator) {
-        double result = calculator.getResult();
-        String formattedResult = String.format("%.4f", result);
-        if (formattedResult.endsWith("0000")) {
-            formattedResult = String.format("%.0f", result);
-        } else if (formattedResult.endsWith("000")) {
-            formattedResult = String.format("%.1f", result);
-        } else if (formattedResult.endsWith("00")) {
-            formattedResult = String.format("%.2f", result);
-        } else if (formattedResult.endsWith("0")) {
-            formattedResult = String.format("%.3f", result);
+    private static int inputNumber(Scanner sc) {
+        while (true) {
+            if (sc.hasNextInt()) return sc.nextInt();
+            System.out.print("Неправильный формат! Попробуйте снова: ");
+            sc.next();
         }
+    }
+
+    private static String inputOperator(Scanner sc) {
+        while (true) {
+            String operator = sc.next();
+            boolean isValid = switch (operator) {
+                case "+", "-", "*", "/", "^", "%" -> true;
+                default -> false;
+            };
+            if (isValid) return operator;
+            System.out.println("Ошибка: операция '" + operator + "' не поддерживается.");
+            System.out.println("Доступны следующие операции: +, -, *, /, ^, %");
+            System.out.print("Попробуйте снова: ");
+        }
+    }
+
+    private static void printFormattedResult(Calculator calculator) {
+        double result = calculator.calculate();
+        String formattedResult = String.format("%.4f", result)
+                .replaceAll("0+$", "")
+                .replaceAll(",$", "");
         System.out.printf("%n%d %s %d = %s%n%n",
                 calculator.getFirstNumber(), calculator.getOperator(), calculator.getSecondNumber(), formattedResult);
     }
@@ -38,7 +61,8 @@ public class CalculatorTest {
             String input = sc.next();
             if (input.equalsIgnoreCase("yes")) {
                 return false;
-            } else if (input.equalsIgnoreCase("no")) {
+            }
+            if (input.equalsIgnoreCase("no")) {
                 System.out.println("До свидания!");
                 return true;
             }
