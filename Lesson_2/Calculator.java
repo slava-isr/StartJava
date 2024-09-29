@@ -24,8 +24,12 @@ public class Calculator {
         return operator;
     }
 
-    public void setOperator(String operator) {
+    public boolean setOperator(String operator) {
         this.operator = operator;
+        return switch (operator) {
+            case "+", "-", "*", "/", "^", "%" -> true;
+            default -> false;
+        };
     }
 
     public double calculate() {
@@ -33,17 +37,23 @@ public class Calculator {
             case "+" -> firstNumber + secondNumber;
             case "-" -> firstNumber - secondNumber;
             case "*" -> firstNumber * secondNumber;
-            case "/" -> (double) firstNumber / secondNumber;
+            case "/" -> divide(firstNumber, secondNumber);
             case "%" -> firstNumber % secondNumber;
             case "^" -> pow(firstNumber, secondNumber);
-            default -> throw new IllegalStateException("Unexpected value: " + operator);
+            default -> throw new IllegalStateException("Неизвестный оператор: " + operator);
         };
+    }
+
+    private double divide(int firstNumber, int secondNumber) {
+        if (getSecondNumber() == 0) {
+            System.out.println("Ошибка: деление на ноль запрещено");
+        }
+        return (double) firstNumber / secondNumber;
     }
 
     private double pow(int firstNumber, int secondNumber) {
         int result = firstNumber;
-        int tempSecondNumber = secondNumber < 0 ? -secondNumber : secondNumber;
-        for (int i = 1; i < tempSecondNumber; i++) {
+        for (int i = 1; i < Math.abs(secondNumber); i++) {
             result *= firstNumber;
         }
         return secondNumber < 0 ? 1. / result : result;
