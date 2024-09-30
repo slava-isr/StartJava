@@ -20,9 +20,9 @@ public class JaegerTest {
         System.out.println("Скорость = " + secondJaeger.getSpeed());
         System.out.println("Сила = " + secondJaeger.getStrength());
         System.out.println("Броня = " + secondJaeger.getArmor());
+        System.out.println("Работоспособность системы дрифта = " + secondJaeger.isDrift());
         secondJaeger.move();
-        secondJaeger.drift();
-        secondJaeger.useVortexCannon();
         System.out.println("Результат поиска кайдзю: " + secondJaeger.scanKaiju());
+        secondJaeger.useVortexCannon();
     }
 }

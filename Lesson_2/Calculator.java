@@ -25,9 +25,11 @@ public class Calculator {
     }
 
     public boolean setOperator(String operator) {
-        this.operator = operator;
         return switch (operator) {
-            case "+", "-", "*", "/", "^", "%" -> true;
+            case "+", "-", "*", "/", "^", "%" -> {
+                this.operator = operator;
+                yield true;
+            }
             default -> false;
         };
     }
@@ -37,21 +39,28 @@ public class Calculator {
             case "+" -> firstNumber + secondNumber;
             case "-" -> firstNumber - secondNumber;
             case "*" -> firstNumber * secondNumber;
-            case "/" -> divide(firstNumber, secondNumber);
-            case "%" -> firstNumber % secondNumber;
-            case "^" -> pow(firstNumber, secondNumber);
+            case "/" -> div();
+            case "%" -> mod();
+            case "^" -> pow();
             default -> throw new IllegalStateException("Неизвестный оператор: " + operator);
         };
     }
 
-    private double divide(int firstNumber, int secondNumber) {
-        if (getSecondNumber() == 0) {
-            System.out.println("Ошибка: деление на ноль запрещено");
-        }
+    private double div() {
+        isDivByZero();
         return (double) firstNumber / secondNumber;
     }
 
-    private double pow(int firstNumber, int secondNumber) {
+    private double mod() {
+        isDivByZero();
+        return (double) firstNumber % secondNumber;
+    }
+
+    private void isDivByZero() {
+        if (secondNumber == 0) System.out.println("\nОшибка: деление на ноль запрещено");
+    }
+
+    private double pow() {
         int result = firstNumber;
         for (int i = 1; i < Math.abs(secondNumber); i++) {
             result *= firstNumber;

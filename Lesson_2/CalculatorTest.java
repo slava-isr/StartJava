@@ -8,12 +8,18 @@ public class CalculatorTest {
         System.out.println("Будьте внимательны - программа работает только с целыми числами");
         Calculator calculator = new Calculator();
         Scanner sc = new Scanner(System.in);
-        do {
+        String userAnswer = "yes";
+        while (userAnswer.equalsIgnoreCase("yes")) {
             inputFirstNumber(calculator, sc);
             inputOperator(calculator, sc);
             inputSecondNumber(calculator, sc);
-            printFormattedResult(calculator);
-        } while (!isExit(sc));
+            printFormattedResult(calculator.getFirstNumber(), calculator.getOperator(),
+                    calculator.getSecondNumber(), calculator.calculate());
+            do {
+                System.out.print("Хотите продолжить вычисления? [yes/no]: ");
+                userAnswer = sc.next();
+            } while (!userAnswer.equalsIgnoreCase("no") && !userAnswer.equalsIgnoreCase("yes"));
+        }
         System.out.println("До свидания!");
         sc.close();
     }
@@ -24,12 +30,6 @@ public class CalculatorTest {
         calculator.setFirstNumber(sc.nextInt());
     }
 
-    private static void inputNumberValidation(Scanner sc) {
-        while (!sc.hasNextInt()) {
-            sc.next();
-            System.out.print("Неправильный формат! Попробуйте снова: ");
-        }
-    }
 
     private static void inputOperator(Calculator calculator, Scanner sc) {
         System.out.print("Введите знак операции (+, -, *, /, ^, %): ");
@@ -48,20 +48,16 @@ public class CalculatorTest {
         calculator.setSecondNumber(sc.nextInt());
     }
 
-    private static void printFormattedResult(Calculator calculator) {
-        DecimalFormat df = new DecimalFormat("#.####");
-        String formattedResult = df.format(calculator.calculate());
-        System.out.printf("%n%d %s %d = %s%n%n",
-                calculator.getFirstNumber(), calculator.getOperator(), calculator.getSecondNumber(), formattedResult);
+    private static void inputNumberValidation(Scanner sc) {
+        while (!sc.hasNextInt()) {
+            sc.next();
+            System.out.print("Неправильный формат! Попробуйте снова: ");
+        }
     }
 
-    private static boolean isExit(Scanner sc) {
-        while (true) {
-            System.out.print("Хотите продолжить вычисления? [yes/no]: ");
-            String input = sc.next();
-            if (input.equalsIgnoreCase("yes")) return false;
-            if (input.equalsIgnoreCase("no")) return true;
-            sc.nextLine();
-        }
+    private static void printFormattedResult(int firstNumber, String operator, int secondNumber, double result) {
+        DecimalFormat df = new DecimalFormat("#.####");
+        String formattedResult = df.format(result);
+        System.out.printf("%n%d %s %d = %s%n%n", firstNumber, operator, secondNumber, formattedResult);
     }
 }

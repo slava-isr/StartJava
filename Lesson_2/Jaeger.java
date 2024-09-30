@@ -9,8 +9,11 @@ public class Jaeger {
     private int strength;
     private int armor;
 
+    public Jaeger() {
+    }
+
     public Jaeger(String modelName, String mark, String origin, float height,
-                  float weight, int speed, int strength, int armor) {
+            float weight, int speed, int strength, int armor) {
         setModelName(modelName);
         setMark(mark);
         setOrigin(origin);
@@ -19,9 +22,6 @@ public class Jaeger {
         setSpeed(speed);
         setStrength(strength);
         setArmor(armor);
-    }
-
-    public Jaeger() {
     }
 
     public String getModelName() {
@@ -120,7 +120,7 @@ public class Jaeger {
         }
     }
 
-    public boolean drift() {
+    public boolean isDrift() {
         System.out.println("Вы вошли в дрифт");
         return true;
     }
