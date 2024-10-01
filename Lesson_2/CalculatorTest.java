@@ -8,8 +8,8 @@ public class CalculatorTest {
         System.out.println("Будьте внимательны - программа работает только с целыми числами");
         Calculator calculator = new Calculator();
         Scanner sc = new Scanner(System.in);
-        String userAnswer = "yes";
-        while (userAnswer.equalsIgnoreCase("yes")) {
+        String userAnswer;
+        do {
             inputFirstNumber(calculator, sc);
             inputOperator(calculator, sc);
             inputSecondNumber(calculator, sc);
@@ -17,19 +17,18 @@ public class CalculatorTest {
                     calculator.getSecondNumber(), calculator.calculate());
             do {
                 System.out.print("Хотите продолжить вычисления? [yes/no]: ");
-                userAnswer = sc.next();
-            } while (!userAnswer.equalsIgnoreCase("no") && !userAnswer.equalsIgnoreCase("yes"));
-        }
+                userAnswer = sc.next().toLowerCase();
+            } while (!"no".equals(userAnswer) && !"yes".equals(userAnswer));
+        } while ("yes".equals(userAnswer));
         System.out.println("До свидания!");
         sc.close();
     }
 
     private static void inputFirstNumber(Calculator calculator, Scanner sc) {
         System.out.print("\nВведите первое число: ");
-        inputNumberValidation(sc);
+        validateInputNumber(sc);
         calculator.setFirstNumber(sc.nextInt());
     }
-
 
     private static void inputOperator(Calculator calculator, Scanner sc) {
         System.out.print("Введите знак операции (+, -, *, /, ^, %): ");
@@ -44,11 +43,11 @@ public class CalculatorTest {
 
     private static void inputSecondNumber(Calculator calculator, Scanner sc) {
         System.out.print("Введите второе число: ");
-        inputNumberValidation(sc);
+        validateInputNumber(sc);
         calculator.setSecondNumber(sc.nextInt());
     }
 
-    private static void inputNumberValidation(Scanner sc) {
+    private static void validateInputNumber(Scanner sc) {
         while (!sc.hasNextInt()) {
             sc.next();
             System.out.print("Неправильный формат! Попробуйте снова: ");

@@ -47,16 +47,16 @@ public class Calculator {
     }
 
     private double div() {
-        isDivByZero();
+        isZero();
         return (double) firstNumber / secondNumber;
     }
 
     private double mod() {
-        isDivByZero();
+        isZero();
         return (double) firstNumber % secondNumber;
     }
 
-    private void isDivByZero() {
+    private void isZero() {
         if (secondNumber == 0) System.out.println("\nОшибка: деление на ноль запрещено");
     }
 
