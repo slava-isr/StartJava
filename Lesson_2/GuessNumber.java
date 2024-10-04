@@ -17,10 +17,9 @@ public class GuessNumber {
 
     public void start(Scanner sc) {
         generateGuessNumber();
-        while (true) {
+        do {
             if (makeMove(firstPlayer, sc)) break;
-            if (makeMove(secondPlayer, sc)) break;
-        }
+        } while (!makeMove(secondPlayer, sc));
     }
 
     private void generateGuessNumber() {
