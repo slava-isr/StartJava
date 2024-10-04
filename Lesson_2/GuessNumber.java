@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class GuessNumber {
 
     private Player firstPlayer;
@@ -13,28 +15,41 @@ public class GuessNumber {
         this.rangeTo = rangeTo;
     }
 
-    public Player getFirstPlayer() {
-        return firstPlayer;
+    public void startGame(Scanner sc) {
+        generateGuessNumber();
+        while (true) {
+            if (executePlayerTurn(firstPlayer, sc)) break;
+            if (executePlayerTurn(secondPlayer, sc)) break;
+        }
     }
 
-    public Player getSecondPlayer() {
-        return secondPlayer;
-    }
-
-    public int getRangeFrom() {
-        return rangeFrom;
-    }
-
-    public int getRangeTo() {
-        return rangeTo;
-    }
-
-    public void generateGuessNumber() {
+    private void generateGuessNumber() {
         this.guessNumber = rangeFrom + (int) (Math.random() * (rangeTo - rangeFrom + 1));
         System.out.printf("Компьютер загадал число от %d до %d включительно!%n", rangeFrom, rangeTo);
     }
 
-    public boolean playerTurn(Player player, int playerNumber) {
+    private boolean executePlayerTurn(Player player, Scanner sc) {
+        System.out.printf("Сейчас отвечает \"%s\": ", player.getName());
+        return playerTurn(player, inputNumber(sc));
+    }
+
+    private int inputNumber(Scanner sc) {
+        while (true) {
+            if (sc.hasNextInt()) {
+                int number = sc.nextInt();
+                if (number >= rangeFrom && number <= rangeTo) {
+                    return number;
+                } else {
+                    System.out.printf("Ошибка! Введите число от %d до %d включительно: ", rangeFrom, rangeTo);
+                }
+            } else {
+                System.out.print("Ошибка! Поддерживаются только числа: ");
+                sc.next();
+            }
+        }
+    }
+
+    private boolean playerTurn(Player player, int playerNumber) {
         player.setNumber(playerNumber);
         if (playerNumber == guessNumber) {
             congratsPlayer(player);
@@ -43,10 +58,6 @@ public class GuessNumber {
             giveHint(playerNumber);
             return false;
         }
-    }
-
-    public boolean isNumberInRange(int number) {
-        return number >= rangeFrom && number <= rangeTo;
     }
 
     private void congratsPlayer(Player player) {
