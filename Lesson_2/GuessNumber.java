@@ -2,10 +2,10 @@ import java.util.Scanner;
 
 public class GuessNumber {
 
-    private Player firstPlayer;
-    private Player secondPlayer;
-    private int rangeFrom;
-    private int rangeTo;
+    private final Player firstPlayer;
+    private final Player secondPlayer;
+    private final int rangeFrom;
+    private final int rangeTo;
     private int guessNumber;
 
     public GuessNumber(Player firstPlayer, Player secondPlayer, int rangeFrom, int rangeTo) {
