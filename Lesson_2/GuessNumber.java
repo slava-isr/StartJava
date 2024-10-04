@@ -15,33 +15,30 @@ public class GuessNumber {
         this.rangeTo = rangeTo;
     }
 
-    public void startGame(Scanner sc) {
+    public void start(Scanner sc) {
         generateGuessNumber();
         while (true) {
-            if (executePlayerTurn(firstPlayer, sc)) break;
-            if (executePlayerTurn(secondPlayer, sc)) break;
+            if (makeMove(firstPlayer, sc)) break;
+            if (makeMove(secondPlayer, sc)) break;
         }
     }
 
     private void generateGuessNumber() {
-        this.guessNumber = rangeFrom + (int) (Math.random() * (rangeTo - rangeFrom + 1));
+        guessNumber = rangeFrom + (int) (Math.random() * (rangeTo - rangeFrom + 1));
         System.out.printf("Компьютер загадал число от %d до %d включительно!%n", rangeFrom, rangeTo);
     }
 
-    private boolean executePlayerTurn(Player player, Scanner sc) {
+    private boolean makeMove(Player player, Scanner sc) {
         System.out.printf("Сейчас отвечает \"%s\": ", player.getName());
-        return playerTurn(player, inputNumber(sc));
+        return isGuessed(player, inputNumber(sc));
     }
 
     private int inputNumber(Scanner sc) {
         while (true) {
             if (sc.hasNextInt()) {
                 int number = sc.nextInt();
-                if (number >= rangeFrom && number <= rangeTo) {
-                    return number;
-                } else {
-                    System.out.printf("Ошибка! Введите число от %d до %d включительно: ", rangeFrom, rangeTo);
-                }
+                if (number >= rangeFrom && number <= rangeTo) return number;
+                System.out.printf("Ошибка! Введите число от %d до %d включительно: ", rangeFrom, rangeTo);
             } else {
                 System.out.print("Ошибка! Поддерживаются только числа: ");
                 sc.next();
@@ -49,27 +46,22 @@ public class GuessNumber {
         }
     }
 
-    private boolean playerTurn(Player player, int playerNumber) {
+    private boolean isGuessed(Player player, int playerNumber) {
         player.setNumber(playerNumber);
         if (playerNumber == guessNumber) {
             congratsPlayer(player);
             return true;
-        } else {
-            giveHint(playerNumber);
-            return false;
         }
-    }
-
-    private void congratsPlayer(Player player) {
-        System.out.println("Поздравляем! " + player.getName() + " победил!");
-    }
-
-    private void giveHint(int playerNumber) {
         System.out.print("Не угадал... введённое число ");
         if (playerNumber > guessNumber) {
             System.out.println("больше загаданного");
         } else {
             System.out.println("меньше загаданного");
         }
+        return false;
+    }
+
+    private void congratsPlayer(Player player) {
+        System.out.println("Поздравляем! " + player.getName() + " победил!");
     }
 }
