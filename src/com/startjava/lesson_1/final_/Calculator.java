@@ -1,6 +1,9 @@
+package com.startjava.lesson_1.final_;
+
 import java.util.Scanner;
 
 public class Calculator {
+
     public static void main(String[] args) {
         System.out.println("Добро пожаловать в \"Калькулятор-cli\"\n");
         System.out.println("Будьте внимательны - программа работает только с натуральными числами");

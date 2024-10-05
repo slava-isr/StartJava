@@ -1,7 +1,10 @@
+package com.startjava.lesson_1.base;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class VariablesTheme {
+
     public static void main(String[] args) {
         System.out.println("1. Вывод характеристик компьютера\n");
 
