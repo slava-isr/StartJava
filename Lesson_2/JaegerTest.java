@@ -1,28 +1,28 @@
 public class JaegerTest {
     public static void main(String[] args) {
-        Jaeger fisrtJaeger = new Jaeger();
-        fisrtJaeger.setModelName("Gipsy Danger");
-        fisrtJaeger.setMark("Mark-3");
-        fisrtJaeger.setOrigin("United States of America");
-        fisrtJaeger.setHeight(79.25f);
-        fisrtJaeger.setWeight(1.980f);
-        fisrtJaeger.setSpeed(7);
-        fisrtJaeger.setStrength(8);
-        fisrtJaeger.setArmor(6);
-        System.out.println(fisrtJaeger + "\n");
+        Jaeger gipsyDanger = new Jaeger();
+        gipsyDanger.setModelName("Gipsy Danger");
+        gipsyDanger.setMark("Mark-3");
+        gipsyDanger.setOrigin("United States of America");
+        gipsyDanger.setHeight(79.25f);
+        gipsyDanger.setWeight(1.980f);
+        gipsyDanger.setSpeed(7);
+        gipsyDanger.setStrength(8);
+        gipsyDanger.setArmor(6);
+        System.out.println(gipsyDanger + "\n");
 
-        Jaeger secondJaeger = new Jaeger("Coyote Tango", "Mark-1", "Japan", 85.34f, 2.312f, 5, 7, 4);
-        System.out.println("Название модели = " + secondJaeger.getModelName());
-        System.out.println("Марка = " + secondJaeger.getMark());
-        System.out.println("Производитель = " + secondJaeger.getOrigin());
-        System.out.println("Высота = " + secondJaeger.getHeight());
-        System.out.println("Масса = " + secondJaeger.getWeight());
-        System.out.println("Скорость = " + secondJaeger.getSpeed());
-        System.out.println("Сила = " + secondJaeger.getStrength());
-        System.out.println("Броня = " + secondJaeger.getArmor());
-        System.out.println("Работоспособность системы дрифта = " + secondJaeger.isDrift());
-        secondJaeger.move();
-        System.out.println("Результат поиска кайдзю: " + secondJaeger.scanKaiju());
-        secondJaeger.useVortexCannon();
+        Jaeger coyoteTango = new Jaeger("Coyote Tango", "Mark-1", "Japan", 85.34f, 2.312f, 5, 7, 4);
+        System.out.println("Название модели = " + coyoteTango.getModelName());
+        System.out.println("Марка = " + coyoteTango.getMark());
+        System.out.println("Производитель = " + coyoteTango.getOrigin());
+        System.out.println("Высота = " + coyoteTango.getHeight());
+        System.out.println("Масса = " + coyoteTango.getWeight());
+        System.out.println("Скорость = " + coyoteTango.getSpeed());
+        System.out.println("Сила = " + coyoteTango.getStrength());
+        System.out.println("Броня = " + coyoteTango.getArmor());
+        System.out.println("Работоспособность системы дрифта = " + coyoteTango.isDrift());
+        coyoteTango.move();
+        System.out.println("Результат поиска кайдзю: " + coyoteTango.scanKaiju());
+        coyoteTango.useVortexCannon();
     }
 }
