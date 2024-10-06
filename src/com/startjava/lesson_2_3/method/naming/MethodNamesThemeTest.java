@@ -13,7 +13,7 @@ public class MethodNamesThemeTest {
     private static void executeNonBooleanMethods(NonBooleanMethods nbm) {
         nbm.findLongestWord();
         nbm.selectMenuItem();
-        nbm.calculateAvgRatings();
+        nbm.calculateAvgGrade();
         nbm.countUniqueWords();
         nbm.showErrorMessage();
         nbm.synchronizeData();
@@ -21,22 +21,22 @@ public class MethodNamesThemeTest {
         nbm.pauseDownload();
         nbm.resetSettings();
         nbm.writeToFile();
-        nbm.convertTemperature();
-        nbm.enterExpression();
-        nbm.getWinner();
-        nbm.findBook();
+        nbm.convertTempCelsiusToFahrenheit();
+        nbm.enterMathExpression();
+        nbm.revealWinner();
+        nbm.findBookByAuthor();
     }
 
     private static void executeBooleanMethods(BooleanMethods bm) {
         System.out.println(bm.isAppEnd());
         System.out.println(bm.isFileDeleted());
-        System.out.println(bm.haveUniqueDigit());
+        System.out.println(bm.hasUniqueDigit());
         System.out.println(bm.isLetter());
-        System.out.println(bm.haveEqualDigits());
-        System.out.println(bm.haveAttempts());
+        System.out.println(bm.hasEqualDigits());
+        System.out.println(bm.hasAttempts());
         System.out.println(bm.isEmptyLine());
         System.out.println(bm.isEvenNumber());
-        System.out.println(bm.isPathValid());
+        System.out.println(bm.isValidPath());
         System.out.println(bm.isFileExist());
     }
 }
