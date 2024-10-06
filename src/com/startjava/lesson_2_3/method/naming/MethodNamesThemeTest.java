@@ -13,7 +13,7 @@ public class MethodNamesThemeTest {
     private static void executeNonBooleanMethods(NonBooleanMethods nbm) {
         nbm.findLongestWord();
         nbm.selectMenuItem();
-        nbm.calculateAvgGrade();
+        nbm.calculateAvgGrades();
         nbm.countUniqueWords();
         nbm.showErrorMessage();
         nbm.synchronizeData();
@@ -21,9 +21,9 @@ public class MethodNamesThemeTest {
         nbm.pauseDownload();
         nbm.resetSettings();
         nbm.writeToFile();
-        nbm.convertTempCelsiusToFahrenheit();
+        nbm.convertTempToFahrenheit();
         nbm.enterMathExpression();
-        nbm.revealWinner();
+        nbm.determineWinner();
         nbm.findBookByAuthor();
     }
 

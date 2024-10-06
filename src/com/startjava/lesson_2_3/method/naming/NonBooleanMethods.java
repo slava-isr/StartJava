@@ -12,7 +12,7 @@ public class NonBooleanMethods {
                 "() -> выбрать пункт меню в текстовом редакторе на macOS");
     }
 
-    public void calculateAvgGrade() {
+    public void calculateAvgGrades() {
         System.out.println(CurrentMethodNameUtil.getName() +
                 "() -> вычислить среднее значение оценок в школе №1234");
     }
@@ -52,7 +52,7 @@ public class NonBooleanMethods {
                 "() -> записать содержимое в файл по указанному пути на флешку");
     }
 
-    public void convertTempCelsiusToFahrenheit() {
+    public void convertTempToFahrenheit() {
         System.out.println(CurrentMethodNameUtil.getName() +
                 "() -> преобразовать температуру из Цельсия в Фаренгейт");
     }
@@ -62,7 +62,7 @@ public class NonBooleanMethods {
                 "() -> ввести математическое выражение с тремя аргументами");
     }
 
-    public void revealWinner() {
+    public void determineWinner() {
         System.out.println(CurrentMethodNameUtil.getName() +
                 "() -> выявить победителя среди гонщиков игры \"Need For Speed\"");
     }
