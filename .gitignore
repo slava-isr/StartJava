@@ -1,9 +1,9 @@
 options
 optionsj
+out
 
 ### IntelliJ IDEA ###
 out/
-out
 gen
 !**/src/main/**/out/
 !**/src/test/**/out/
