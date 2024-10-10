@@ -62,7 +62,7 @@ public class RpsGameFormatting {
     }
 
     private static void defineWinner(String firstPlayerName, String firstPlayerSign,
-                                     String secondPlayerName, String secondPlayerSign) {
+        String secondPlayerName, String secondPlayerSign) {
         if (firstPlayerSign.equals(secondPlayerSign)) {
             System.out.println("\nПобедила дружба!");
             return;
