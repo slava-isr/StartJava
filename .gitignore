@@ -1,16 +1,20 @@
+### Config for CheckStyle###
+startjava_checks.xml
+
+### Options for compile ###
 options
 optionsj
-out
 
 ### IntelliJ IDEA ###
-out/
+
+out
 gen
 !**/src/main/**/out/
 !**/src/test/**/out/
 .idea
 *.iml
 
-### JAVA ###
+### Java ###
 
 # Compiled class file
 *.class
@@ -36,3 +40,4 @@ gen
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+/startjava_checks.xml
