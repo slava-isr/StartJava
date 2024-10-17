@@ -23,19 +23,19 @@ public class Reverse {
     }
 
     private static int[] reverse(int[] numbers) {
-        if (numbers == null || numbers.length == 0) return numbers;
-        int length = numbers.length;
-        int[] reversedNumbers = new int[length];
-        for (int i = 0; i < length; i++) {
-            reversedNumbers[length - 1 - i] = numbers[i];
+        if (numbers == null || numbers.length == 0) return new int[0];
+        int len = numbers.length;
+        int[] reversedNumbers = new int[len];
+        for (int i = 0; i < len; i++) {
+            reversedNumbers[len - 1 - i] = numbers[i];
         }
         return reversedNumbers;
     }
 
     private static String resultToString(int[] numbers, int[] reversedNumbers) {
         StringBuilder result = new StringBuilder();
-        if (numbers == null || numbers.length == 0) {
-            result.append("Ошибка: передан недопустимый массив").append("\n");
+        if (numbers.length == 0) {
+            result.append("Ошибка: передан недопустимый массив\n");
         } else {
             result.append("   До реверса: ").append(Arrays.toString(numbers)).append("\n");
             result.append("После реверса: ").append(Arrays.toString(reversedNumbers)).append("\n");
