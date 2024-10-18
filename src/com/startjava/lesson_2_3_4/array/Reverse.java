@@ -5,41 +5,38 @@ import java.util.Arrays;
 public class Reverse {
 
     public static void main(String[] args) {
-        int[] numbers = new int[]{};
-        int[] reversedNumbers = reverse(numbers);
-        System.out.println(resultToString(numbers, reversedNumbers));
-
-        numbers = null;
-        reversedNumbers = reverse(numbers);
-        System.out.println(resultToString(numbers, reversedNumbers));
-
-        numbers = new int[]{6, 8, 9, 1};
-        reversedNumbers = reverse(numbers);
-        System.out.println(resultToString(numbers, reversedNumbers));
-
-        numbers = new int[]{13, 8, 5, 3, 2, 1, 1};
-        reversedNumbers = reverse(numbers);
-        System.out.print(resultToString(numbers, reversedNumbers));
+        Result result = reverse(new int[]{});
+        System.out.println(result);
+        result = reverse(null);
+        System.out.println(result);
+        result = reverse(new int[]{6, 8, 9, 1});
+        System.out.println(result);
+        result = reverse(new int[]{13, 8, 5, 3, 2, 1, 1});
+        System.out.print(result);
     }
 
-    private static int[] reverse(int[] numbers) {
-        if (numbers == null || numbers.length == 0) return new int[0];
+    private static Result reverse(int[] numbers) {
+        if (numbers == null || numbers.length == 0) return new Result(numbers, null);
         int len = numbers.length;
         int[] reversedNumbers = new int[len];
         for (int i = 0; i < len; i++) {
             reversedNumbers[len - 1 - i] = numbers[i];
         }
-        return reversedNumbers;
+        return new Result(numbers, reversedNumbers);
     }
 
-    private static String resultToString(int[] numbers, int[] reversedNumbers) {
-        StringBuilder result = new StringBuilder();
-        if (numbers.length == 0) {
-            result.append("Ошибка: передан недопустимый массив\n");
-        } else {
-            result.append("   До реверса: ").append(Arrays.toString(numbers)).append("\n");
-            result.append("После реверса: ").append(Arrays.toString(reversedNumbers)).append("\n");
+    private record Result(int[] numbers, int[] reversedNumbers) {
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            if (reversedNumbers == null) {
+                sb.append("Ошибка: передан недопустимый массив (").append(Arrays.toString(numbers)).append(")\n");
+            } else {
+                sb.append("   До реверса: ").append(Arrays.toString(numbers)).append("\n");
+                sb.append("После реверса: ").append(Arrays.toString(reversedNumbers)).append("\n");
+            }
+            return sb.toString();
         }
-        return result.toString();
     }
 }
