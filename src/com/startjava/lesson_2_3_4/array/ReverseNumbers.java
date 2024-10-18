@@ -31,10 +31,10 @@ public class ReverseNumbers {
 
     private static void displayResult(int[] numbers, int[] reversedNumbers) {
         if (numbers == null || numbers.length == 0) {
-            System.out.printf("Ошибка: передан недопустимый массив (%s)%n", Arrays.toString(numbers));
+            System.out.printf("Ошибка: передан недопустимый массив (%s)%n%n", Arrays.toString(numbers));
         } else {
             System.out.printf("   До реверса: %s%n", Arrays.toString(numbers));
-            System.out.printf("После реверса: %s%n", Arrays.toString(reversedNumbers));
+            System.out.printf("После реверса: %s%n%n", Arrays.toString(reversedNumbers));
         }
     }
 }
