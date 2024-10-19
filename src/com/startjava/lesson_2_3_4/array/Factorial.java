@@ -50,7 +50,8 @@ public class Factorial {
         StringBuilder sb = new StringBuilder();
         sb.append(number).append("! = ");
         if (number < 2) {
-            return sb.append("1").toString();
+            sb.append("1");
+            return sb.toString();
         }
         for (int j = 1; j < number; j++) {
             sb.append(j).append(" * ");
