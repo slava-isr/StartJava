@@ -5,19 +5,16 @@ public class Triangle {
     public static void main(String[] args) {
         char start = '0';
         char end = '9';
-        char[] sortedCharacters = sort(start, end, true);
-        displayResult(start, end, sortedCharacters);
+        displayResult(sortCharacters(start, end, true), start, end);
         start = '/';
         end = '!';
-        sortedCharacters = sort(start, end, false);
-        displayResult(start, end, sortedCharacters);
+        displayResult(sortCharacters(start, end, false), start, end);
         start = 'A';
         end = 'J';
-        sortedCharacters = sort(start, end, false);
-        displayResult(start, end, sortedCharacters);
+        displayResult(sortCharacters(start, end, false), start, end);
     }
 
-    private static char[] sort(char start, char end, boolean ascending) {
+    private static char[] sortCharacters(char start, char end, boolean ascending) {
         if (start > end) return null;
         char[] sortedCharacters = new char[end - start + 1];
         for (int i = 0; i < sortedCharacters.length; i++) {
@@ -26,13 +23,12 @@ public class Triangle {
         return sortedCharacters;
     }
 
-    private static void displayResult(char start, char end, char[] sortedCharacters) {
-        StringBuilder sb = new StringBuilder();
+    private static void displayResult(char[] sortedCharacters, char start, char end) {
         if (sortedCharacters == null) {
-            sb.append("Ошибка: левая граница (").append((int) start).append(") ");
-            sb.append("> правой (").append((int) end).append(")\n");
+            System.out.printf("Ошибка: левая граница (%d) > правой (%d)%n%n", (int) start, (int) end);
             return;
         }
+        StringBuilder sb = new StringBuilder();
         int len = sortedCharacters.length;
         for (int i = 0; i < len; i++) {
             sb.append(" ".repeat(len - i - 1));
