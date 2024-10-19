@@ -10,7 +10,7 @@ public class ValueLimiter {
         for (int index : thresholdValueIndexes) {
             float[] sourceValues = new float[15];
             for (int i = 0; i < sourceValues.length; i++) sourceValues[i] = (float) Math.random();
-            displayResult(index, sourceValues, resetValues(index, sourceValues));
+            displayResult(sourceValues, resetValues(index, sourceValues), index);
         }
     }
 
@@ -31,7 +31,7 @@ public class ValueLimiter {
         return overwrittenValues;
     }
 
-    private static void displayResult(int thresholdValueIndex, float[] sourceValues, float[] overwrittenValues) {
+    private static void displayResult(float[] sourceValues, float[] overwrittenValues, int thresholdValueIndex) {
         int len = sourceValues.length;
         if (thresholdValueIndex < 0 || thresholdValueIndex >= len) {
             System.out.print("Ошибка: индекс должен быть в диапазоне [0, ");
