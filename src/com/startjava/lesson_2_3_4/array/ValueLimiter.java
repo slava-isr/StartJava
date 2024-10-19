@@ -1,27 +1,27 @@
 package com.startjava.lesson_2_3_4.array;
 
 import java.text.DecimalFormat;
-import java.util.Arrays;
 
 public class ValueLimiter {
-    private static int resetCounter = 0;
+    private static int resetCounter;
 
     public static void main(String[] args) {
         int[] thresholdValueIndexes = {-1, 15, 0, 14};
         for (int index : thresholdValueIndexes) {
-            double[] sourceValues = new double[15];
-            Arrays.setAll(sourceValues, value -> Math.random());
+            float[] sourceValues = new float[15];
+            for (int i = 0; i < sourceValues.length; i++) sourceValues[i] = (float) Math.random();
             displayResult(index, sourceValues, resetValues(index, sourceValues));
         }
     }
 
-    private static double[] resetValues(int thresholdValueIndex, double[] sourceValues) {
+    private static float[] resetValues(int thresholdValueIndex, float[] sourceValues) {
         int len = sourceValues.length;
         if (thresholdValueIndex < 0 || thresholdValueIndex >= len) return null;
-        double[] overwrittenValues = new double[len];
+        float[] overwrittenValues = new float[len];
         resetCounter = 0;
+        float thresholdValue = sourceValues[thresholdValueIndex];
         for (int i = 0; i < len; i++) {
-            if (Double.compare(sourceValues[i], sourceValues[thresholdValueIndex]) > 0) {
+            if (sourceValues[i] > thresholdValue) {
                 overwrittenValues[i] = 0;
                 resetCounter++;
             } else {
@@ -31,7 +31,7 @@ public class ValueLimiter {
         return overwrittenValues;
     }
 
-    private static void displayResult(int thresholdValueIndex, double[] sourceValues, double[] overwrittenValues) {
+    private static void displayResult(int thresholdValueIndex, float[] sourceValues, float[] overwrittenValues) {
         int len = sourceValues.length;
         if (thresholdValueIndex < 0 || thresholdValueIndex >= len) {
             System.out.print("Ошибка: индекс должен быть в диапазоне [0, ");
@@ -40,24 +40,20 @@ public class ValueLimiter {
         }
         DecimalFormat df = new DecimalFormat("0.000");
         System.out.println("Исходный массив:");
-        System.out.println(valuesToString(Arrays.copyOfRange(sourceValues, 0, 8), df));
-        System.out.println(valuesToString(Arrays.copyOfRange(sourceValues, 8, len), df));
+        System.out.println(valuesToString(sourceValues, df));
         System.out.printf("Значение по индексу (%d): ", thresholdValueIndex);
         System.out.printf("%s%n%n", df.format(sourceValues[thresholdValueIndex]));
         System.out.println("Измененный массив:");
-        System.out.println(valuesToString(Arrays.copyOfRange(overwrittenValues, 0, 8), df));
-        System.out.println(valuesToString(Arrays.copyOfRange(overwrittenValues, 8, len), df));
+        System.out.println(valuesToString(overwrittenValues, df));
         System.out.printf("Количество обнуленных ячеек: %d%n%n", resetCounter);
     }
 
-    private static String valuesToString(double[] values, DecimalFormat df) {
+    private static String valuesToString(float[] values, DecimalFormat df) {
         StringBuilder sb = new StringBuilder();
-        sb.append("[");
         for (int i = 0; i < values.length; i++) {
-            sb.append(df.format(values[i]));
-            if (i < values.length - 1) sb.append(", ");
+            sb.append(df.format(values[i])).append("  ");
+            if (i == 7) sb.append("\n");
         }
-        sb.append("]");
         return sb.toString();
     }
 }
