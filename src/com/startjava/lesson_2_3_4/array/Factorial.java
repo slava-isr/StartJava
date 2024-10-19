@@ -34,25 +34,28 @@ public class Factorial {
     public static void displayResult(long[] sourceNumbers, long[] factorials) {
         if (sourceNumbers == null || sourceNumbers.length == 0) {
             System.out.printf("Ошибка: передан недопустимый массив (%s)%n%n", Arrays.toString(sourceNumbers));
-        } else {
-            for (int i = 0; i < factorials.length; i++) {
-                if (sourceNumbers[i] < 0) {
-                    System.out.printf("Ошибка: факториал %d! не определен%n", sourceNumbers[i]);
-                } else {
-                    System.out.println(createMultiplicationString(sourceNumbers[i], factorials[i]));
-                }
-            }
-            System.out.println();
+            return;
         }
+        for (int i = 0; i < factorials.length; i++) {
+            if (sourceNumbers[i] < 0) {
+                System.out.printf("Ошибка: факториал %d! не определен%n", sourceNumbers[i]);
+            } else {
+                System.out.println(createExpression(sourceNumbers[i], factorials[i]));
+            }
+        }
+        System.out.println();
     }
 
-    private static String createMultiplicationString(long number, long factorial) {
-        StringBuilder str = new StringBuilder(number + "! = ");
-        if (number < 2) return str + "1";
-        for (int j = 1; j < number; j++) {
-            str.append(j).append(" * ");
+    private static String createExpression(long number, long factorial) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(number).append("! = ");
+        if (number < 2) {
+            return sb.append("1").toString();
         }
-        str.append(number).append(" = ").append(factorial);
-        return str.toString();
+        for (int j = 1; j < number; j++) {
+            sb.append(j).append(" * ");
+        }
+        sb.append(number).append(" = ").append(factorial);
+        return sb.toString();
     }
 }
