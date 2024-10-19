@@ -6,25 +6,25 @@ public class ReverseNumbers {
 
     public static void main(String[] args) {
         int[] sourceNumbers = new int[]{};
-        int[] reversedNumbers = toReverse(sourceNumbers);
+        int[] reversedNumbers = reverse(sourceNumbers);
         displayResult(sourceNumbers, reversedNumbers);
         sourceNumbers = null;
-        reversedNumbers = toReverse(sourceNumbers);
+        reversedNumbers = reverse(sourceNumbers);
         displayResult(sourceNumbers, reversedNumbers);
         sourceNumbers = new int[]{6, 8, 9, 1};
-        reversedNumbers = toReverse(sourceNumbers);
+        reversedNumbers = reverse(sourceNumbers);
         displayResult(sourceNumbers, reversedNumbers);
         sourceNumbers = new int[]{13, 8, 5, 3, 2, 1, 1};
-        reversedNumbers = toReverse(sourceNumbers);
+        reversedNumbers = reverse(sourceNumbers);
         displayResult(sourceNumbers, reversedNumbers);
     }
 
-    private static int[] toReverse(int[] numbers) {
-        if (numbers == null || numbers.length == 0) return numbers;
-        int len = numbers.length;
+    private static int[] reverse(int[] sourceNumbers) {
+        if (sourceNumbers == null || sourceNumbers.length == 0) return sourceNumbers;
+        int len = sourceNumbers.length;
         int[] reversedNumbers = new int[len];
         for (int i = 0; i < len; i++) {
-            reversedNumbers[len - 1 - i] = numbers[i];
+            reversedNumbers[len - 1 - i] = sourceNumbers[i];
         }
         return reversedNumbers;
     }

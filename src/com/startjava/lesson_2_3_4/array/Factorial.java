@@ -5,55 +5,54 @@ import java.util.Arrays;
 public class Factorial {
 
     public static void main(String[] args) {
-        long[] factorials = toCalculate(new long[]{});
-        displayResult(factorials, new long[]{});
-        factorials = toCalculate(null);
-        displayResult(factorials, null);
-        factorials = toCalculate(8, 0, 9);
-        displayResult(factorials, 8, 0, 9);
-        factorials = toCalculate(-3, 1, 7, 13);
-        displayResult(factorials, -3, 1, 7, 13);
-        factorials = toCalculate(-22, -0);
-        displayResult(factorials, -22, -0);
+        long[] sourceNumbers = new long[]{};
+        displayResult(sourceNumbers, calculate(sourceNumbers));
+        sourceNumbers = null;
+        displayResult(sourceNumbers, calculate(sourceNumbers));
+        sourceNumbers = new long[]{8, 0, 9};
+        displayResult(sourceNumbers, calculate(sourceNumbers));
+        sourceNumbers = new long[]{-3, 1, 7, 13};
+        displayResult(sourceNumbers, calculate(sourceNumbers));
+        sourceNumbers = new long[]{-22, -0};
+        displayResult(sourceNumbers, calculate(sourceNumbers));
     }
 
-    private static long[] toCalculate(long... numbers) {
-        if (numbers == null || numbers.length == 0) return numbers;
-        int len = numbers.length;
-        long[] factorials = Arrays.copyOf(numbers, len);
+    private static long[] calculate(long... sourceNumbers) {
+        if (sourceNumbers == null || sourceNumbers.length == 0) return sourceNumbers;
+        int len = sourceNumbers.length;
+        long[] factorials = new long[len];
         for (int i = 0; i < len; i++) {
-            if (numbers[i] == 0 || numbers[i] == 1) {
-                factorials[i] = 1;
-            } else {
-                long factorial = 1;
-                for (int j = 2; j <= numbers[i]; j++) {
-                    factorial *= j;
-                }
-                factorials[i] = factorial;
+            long factorial = 1;
+            for (int j = 2; j <= sourceNumbers[i]; j++) {
+                factorial *= j;
             }
+            factorials[i] = factorial;
         }
         return factorials;
     }
 
-    public static void displayResult(long[] factorials, long... sourceNumbers) {
+    public static void displayResult(long[] sourceNumbers, long[] factorials) {
         if (sourceNumbers == null || sourceNumbers.length == 0) {
             System.out.printf("Ошибка: передан недопустимый массив (%s)%n%n", Arrays.toString(sourceNumbers));
         } else {
             for (int i = 0; i < factorials.length; i++) {
-                if (sourceNumbers[i] < 0) System.out.printf("Ошибка: факториал %d! не определен%n", sourceNumbers[i]);
-                else System.out.println(createMultiplicationLine(sourceNumbers[i], factorials[i]));
+                if (sourceNumbers[i] < 0) {
+                    System.out.printf("Ошибка: факториал %d! не определен%n", sourceNumbers[i]);
+                } else {
+                    System.out.println(createMultiplicationString(sourceNumbers[i], factorials[i]));
+                }
             }
             System.out.println();
         }
     }
 
-    private static String createMultiplicationLine(long number, long factorial) {
-        String line = number + "! = ";
-        if (number < 2) return line + "1";
+    private static String createMultiplicationString(long number, long factorial) {
+        StringBuilder str = new StringBuilder(number + "! = ");
+        if (number < 2) return str + "1";
         for (int j = 1; j < number; j++) {
-            line += j + " * ";
+            str.append(j).append(" * ");
         }
-        line += number + " = " + factorial;
-        return line;
+        str.append(number).append(" = ").append(factorial);
+        return str.toString();
     }
 }
