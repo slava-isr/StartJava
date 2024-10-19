@@ -10,11 +10,11 @@ public class ValueLimiter {
         for (int index : thresholdValueIndexes) {
             float[] sourceValues = new float[15];
             for (int i = 0; i < sourceValues.length; i++) sourceValues[i] = (float) Math.random();
-            displayResult(sourceValues, resetValues(index, sourceValues), index);
+            displayResult(sourceValues, resetValues(sourceValues, index), index);
         }
     }
 
-    private static float[] resetValues(int thresholdValueIndex, float[] sourceValues) {
+    private static float[] resetValues(float[] sourceValues, int thresholdValueIndex) {
         int len = sourceValues.length;
         if (thresholdValueIndex < 0 || thresholdValueIndex >= len) return null;
         float[] overwrittenValues = new float[len];
