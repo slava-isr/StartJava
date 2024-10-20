@@ -1,17 +1,22 @@
 package com.startjava.lesson_2_3_4.array;
 
-import java.text.DecimalFormat;
-
 public class ValueLimiter {
     private static int resetCounter;
 
     public static void main(String[] args) {
         int[] thresholdValueIndexes = {-1, 15, 0, 14};
         for (int index : thresholdValueIndexes) {
-            float[] sourceValues = new float[15];
-            for (int i = 0; i < sourceValues.length; i++) sourceValues[i] = (float) Math.random();
+            float[] sourceValues = createValues(15);
             displayResult(sourceValues, resetValues(sourceValues, index), index);
         }
+    }
+
+    private static float[] createValues(int length) {
+        float[] values = new float[length];
+        for (int i = 0; i < values.length; i++) {
+            values[i] = (float) Math.random();
+        }
+        return values;
     }
 
     private static float[] resetValues(float[] sourceValues, int thresholdValueIndex) {
@@ -38,20 +43,19 @@ public class ValueLimiter {
             System.out.printf("%d] (%d)%n%n", len - 1, thresholdValueIndex);
             return;
         }
-        DecimalFormat df = new DecimalFormat("0.000");
         System.out.println("Исходный массив:");
-        System.out.println(valuesToString(sourceValues, df));
+        System.out.println(arrayToString(sourceValues));
         System.out.printf("Значение по индексу (%d): ", thresholdValueIndex);
-        System.out.printf("%s%n%n", df.format(sourceValues[thresholdValueIndex]));
+        System.out.printf("%.3f%n%n", sourceValues[thresholdValueIndex]);
         System.out.println("Измененный массив:");
-        System.out.println(valuesToString(overwrittenValues, df));
+        System.out.println(arrayToString(overwrittenValues));
         System.out.printf("Количество обнуленных ячеек: %d%n%n", resetCounter);
     }
 
-    private static String valuesToString(float[] values, DecimalFormat df) {
+    private static String arrayToString(float[] array) {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < values.length; i++) {
-            sb.append(df.format(values[i])).append("  ");
+        for (int i = 0; i < array.length; i++) {
+            sb.append(String.format("%.3f", array[i])).append("  ");
             if (i == 7) sb.append("\n");
         }
         return sb.toString();
