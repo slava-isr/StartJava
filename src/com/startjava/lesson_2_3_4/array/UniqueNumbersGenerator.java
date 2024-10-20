@@ -18,13 +18,24 @@ public class UniqueNumbersGenerator {
             System.out.printf("Ошибка: левая граница (%d) > правой (%d)%n%n", start, end);
             return new int[0];
         }
-        int length = (int) (Math.abs(end - start) * 0.75);
-        int[] uniqueNumbers = new int[length];
-        for (int i = 0; i < length; i++) {
-            uniqueNumbers[i] = new Random().nextInt(end - start + 1) + start;
+        int len = (int) (Math.abs(end - start) * 0.75);
+        int[] uniqueNumbers = new int[len];
+        int i = 0;
+        while (i < len) {
+            int uniqueNumber = new Random().nextInt(end - start + 1) + start;
+            if (isUniqueNumber(uniqueNumbers, uniqueNumber, i)) {
+                uniqueNumbers[i++] = uniqueNumber;
+            }
         }
         Arrays.sort(uniqueNumbers);
         return uniqueNumbers;
+    }
+
+    private static boolean isUniqueNumber(int[] numbers, int number, int size) {
+        for (int i = 0; i < size; i++) {
+            if (number == numbers[i]) return false;
+        }
+        return true;
     }
 
     public static void displayResult(int[] uniqueNumbers, int numbersPerLine) {
@@ -35,7 +46,7 @@ public class UniqueNumbersGenerator {
             System.out.printf("Ошибка: длина массива должна быть больше 0 (%d)%n%n", length);
         } else {
             for (int i = 0; i < length; i++) {
-                System.out.printf("%-4d", uniqueNumbers[i]);
+                System.out.printf("%4d", uniqueNumbers[i]);
                 if (((i + 1) % numbersPerLine == 0) || (i == length - 1)) {
                     System.out.println();
                 }
