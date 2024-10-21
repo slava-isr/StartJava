@@ -7,26 +7,17 @@ public class Typewriter {
                 "- James Gosling";
         String robertsQuote = "Чтобы написать чистый код, мы сначала пишем грязный код, затем рефакторим его.\n" +
                 "- Robert Martin";
-        displayText(capitalize(jamesQuote));
-        displayText(capitalize(robertsQuote));
-        displayText(capitalize(null));
-        displayText(capitalize(""));
+        type(jamesQuote);
+        type(robertsQuote);
+        type(null);
+        type("");
     }
 
-    private static void displayText(String text) throws InterruptedException {
+    private static void type(String text) throws InterruptedException {
         if (text == null || text.isBlank()) {
-            System.out.println("Ошибка: передана недопустимая строка\n");
+            System.out.printf("Ошибка: недопустимая строка (%s)%n%n", text == null ? text : "пусто");
             return;
         }
-        for (char symbol : text.toCharArray()) {
-            System.out.print(symbol);
-            Thread.sleep(100);
-        }
-        System.out.println("\n");
-    }
-
-    private static String capitalize(String text) {
-        if (text == null || text.isBlank()) return text;
         String[] words = text.split(" ");
         String minWord = words[0];
         String maxWord = words[0];
@@ -34,12 +25,11 @@ public class Typewriter {
         int maxWordIndex = 0;
         for (int i = 1; i < words.length; i++) {
             String word = words[i].replaceAll("\\p{P}", "");
-            int wordLength = word.length();
-            if (wordLength < minWord.length() && !word.isBlank()) {
+            if (word.length() < minWord.length() && !word.isBlank()) {
                 minWord = word;
                 minWordIndex = i;
             }
-            if (wordLength > maxWord.length()) {
+            if (word.length() > maxWord.length()) {
                 maxWord = word;
                 maxWordIndex = i;
             }
@@ -52,6 +42,14 @@ public class Typewriter {
         for (int i = minWordIndex; i <= maxWordIndex; i++) {
             words[i] = words[i].toUpperCase();
         }
-        return String.join(" ", words);
+        displayText(String.join(" ", words));
+    }
+
+    private static void displayText(String text) throws InterruptedException {
+        for (char symbol : text.toCharArray()) {
+            System.out.print(symbol);
+            Thread.sleep(100);
+        }
+        System.out.println("\n");
     }
 }
