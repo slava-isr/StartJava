@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class Console {
 
-    public static void withTypingEffect(String text) throws InterruptedException {
+    public static void printWithTypingEffect(String text) throws InterruptedException {
         if (text == null || text.isBlank()) {
             System.out.printf("Ошибка: недопустимая строка (%s)%n%n", text == null ? text : "пусто");
             return;
@@ -16,15 +16,31 @@ public class Console {
         System.out.println("\n");
     }
 
-    public static void uniqueValues(int[] uniqueValues, int valuesPerLine) {
-        int length = uniqueValues.length;
+    public static void printValuesByTwoLines(float[] sourceValues, float[] overwrittenValues, int thresholdValueIndex) {
+        int len = sourceValues.length;
+        if (thresholdValueIndex < 0 || thresholdValueIndex >= len) {
+            System.out.print("Ошибка: индекс должен быть в диапазоне [0, ");
+            System.out.printf("%d] (%d)%n%n", len - 1, thresholdValueIndex);
+            return;
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < len; i++) {
+            sb.append(String.format("%.3f", overwrittenValues[i])).append("  ");
+            if (i == 7) sb.append("\n");
+        }
+        sb.append("\n");
+        System.out.println(sb);
+    }
+
+    public static void printValuesByLines(int[] values, int valuesPerLine) {
+        int length = values.length;
         if (valuesPerLine < 1) {
             System.out.printf("Ошибка: количество чисел в строке не может быть меньше 1 (%d)%n%n", valuesPerLine);
         } else if (length < 1) {
             System.out.printf("Ошибка: длина массива должна быть больше 0 (%d)%n%n", length);
         } else {
             for (int i = 0; i < length; i++) {
-                System.out.printf("%4d", uniqueValues[i]);
+                System.out.printf("%4d", values[i]);
                 if (((i + 1) % valuesPerLine == 0) || (i == length - 1)) {
                     System.out.println();
                 }
@@ -33,37 +49,13 @@ public class Console {
         }
     }
 
-    public static void reversedValues(int[] sourceValues, int[] reversedValues) {
-        if (sourceValues == null || sourceValues.length == 0) {
-            System.out.printf("Ошибка: передан недопустимый массив (%s)%n%n", Arrays.toString(sourceValues));
-        } else {
-            System.out.printf("%s%n%n", Arrays.toString(reversedValues));
-        }
-    }
-
-    public static void resetValues(float[] sourceValues, float[] overwrittenValues, int thresholdValueIndex) {
-        int len = sourceValues.length;
-        if (thresholdValueIndex < 0 || thresholdValueIndex >= len) {
-            System.out.print("Ошибка: индекс должен быть в диапазоне [0, ");
-            System.out.printf("%d] (%d)%n%n", len - 1, thresholdValueIndex);
-            return;
-        }
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < overwrittenValues.length; i++) {
-            sb.append(String.format("%.3f", overwrittenValues[i])).append("  ");
-            if (i == 7) sb.append("\n");
-        }
-        sb.append("\n");
-        System.out.println(sb);
-    }
-
-    public static void factorialsExpression(long[] sourceValues, long[] factorials) {
-        if (sourceValues == null || sourceValues.length == 0) {
-            System.out.printf("Ошибка: передан недопустимый массив (%s)%n%n", Arrays.toString(sourceValues));
+    public static void printFactorialsExpression(long[] values, long[] factorials) {
+        if (values == null || values.length == 0) {
+            System.out.printf("Ошибка: передан недопустимый массив (%s)%n%n", Arrays.toString(values));
             return;
         }
         for (int i = 0; i < factorials.length; i++) {
-            long number = sourceValues[i];
+            long number = values[i];
             if (number < 0) {
                 System.out.printf("Ошибка: факториал %d! не определен%n", number);
             } else {
@@ -84,26 +76,34 @@ public class Console {
         System.out.println();
     }
 
-    public static void charactersTriangle(char[] sortedCharacters) {
-        if (sortedCharacters == null) return;
+    public static void printCharactersTriangle(char[] characters) {
+        if (characters == null) return;
         StringBuilder triangle = new StringBuilder();
-        int len = sortedCharacters.length;
+        int len = characters.length;
         for (int i = 0; i < len; i++) {
             triangle.append(" ".repeat(len - i - 1));
-            triangle.append((sortedCharacters[i] + "").repeat(2 * i + 1));
+            triangle.append((characters[i] + "").repeat(2 * i + 1));
             triangle.append('\n');
         }
         System.out.println(triangle);
+    }
+
+    public static void printArray(int[] array) {
+        if (array == null || array.length == 0) {
+            System.out.printf("Ошибка: передан недопустимый массив (%s)%n%n", Arrays.toString(array));
+        } else {
+            System.out.printf("%s%n%n", Arrays.toString(array));
+        }
     }
 }
 
 /*  TODO придумать что-то с информационным выводом на консоль
 
-====== reversedValues ======
+====== printArray ======
 System.out.printf("   До реверса: %s%n", Arrays.toString(sourceValues));
-System.out.printf("После реверса: %s%n%n", Arrays.toString(reversedValues));
+System.out.printf("После реверса: %s%n%n", Arrays.toString(printArray));
 
-====== resetValues ======
+====== printValuesByTwoLines ======
 System.out.println("Исходный массив:");
 System.out.println(arrayToString(sourceValues));
 System.out.printf("Значение по индексу (%d): ", thresholdValueIndex);
