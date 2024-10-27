@@ -29,7 +29,7 @@ public class Arrays {
 
     public static float[] resetValues(float[] sourceValues, int thresholdValueIndex) {
         int len = sourceValues.length;
-        if (thresholdValueIndex < 0 || thresholdValueIndex >= len) return null;
+        if (thresholdValueIndex < 0 || thresholdValueIndex >= len) return new float[15];
         float[] overwrittenValues = new float[len];
         float thresholdValue = sourceValues[thresholdValueIndex];
         for (int i = 0; i < len; i++) {
@@ -74,7 +74,7 @@ public class Arrays {
         return values;
     }
 
-    public static String capitalizeBetweenMinMaxWords(String text) {
+    public static String upperCaseRange(String text) {
         if (text == null || text.isBlank()) return text;
         String[] words = text.split(" ");
         String minWord = words[0];
@@ -103,8 +103,11 @@ public class Arrays {
         return String.join(" ", words);
     }
 
-    public static long[] calculateFactorials(long... sourceValues) {
-        if (sourceValues == null || sourceValues.length == 0) return sourceValues;
+    public static long[] factorials(int... sourceValues) {
+        if (sourceValues == null || sourceValues.length == 0) {
+            System.out.printf("Ошибка: передан недопустимый массив (%s)%n%n", java.util.Arrays.toString(sourceValues));
+            return null;
+        }
         int len = sourceValues.length;
         long[] factorials = new long[len];
         for (int i = 0; i < len; i++) {

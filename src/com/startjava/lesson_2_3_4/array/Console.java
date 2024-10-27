@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class Console {
 
-    public static void printWithTypingEffect(String text) throws InterruptedException {
+    public static void type(String text) throws InterruptedException {
         if (text == null || text.isBlank()) {
             System.out.printf("Ошибка: недопустимая строка (%s)%n%n", text == null ? text : "пусто");
             return;
@@ -16,8 +16,8 @@ public class Console {
         System.out.println("\n");
     }
 
-    public static void printValuesByTwoLines(float[] sourceValues, float[] overwrittenValues, int thresholdValueIndex) {
-        int len = sourceValues.length;
+    public static void printTwoLines(float[] overwrittenValues, int thresholdValueIndex) {
+        int len = overwrittenValues.length;
         if (thresholdValueIndex < 0 || thresholdValueIndex >= len) {
             System.out.print("Ошибка: индекс должен быть в диапазоне [0, ");
             System.out.printf("%d] (%d)%n%n", len - 1, thresholdValueIndex);
@@ -32,7 +32,7 @@ public class Console {
         System.out.println(sb);
     }
 
-    public static void printValuesByLines(int[] values, int valuesPerLine) {
+    public static void printMultiline(int[] values, int valuesPerLine) {
         int length = values.length;
         if (valuesPerLine < 1) {
             System.out.printf("Ошибка: количество чисел в строке не может быть меньше 1 (%d)%n%n", valuesPerLine);
@@ -49,11 +49,8 @@ public class Console {
         }
     }
 
-    public static void printFactorialsExpression(long[] values, long[] factorials) {
-        if (values == null || values.length == 0) {
-            System.out.printf("Ошибка: передан недопустимый массив (%s)%n%n", Arrays.toString(values));
-            return;
-        }
+    public static void printFactorialsExpression(int[] values, long[] factorials) {
+        if (factorials == null) return;
         for (int i = 0; i < factorials.length; i++) {
             long number = values[i];
             if (number < 0) {
@@ -76,7 +73,15 @@ public class Console {
         System.out.println();
     }
 
-    public static void printCharactersTriangle(char[] characters) {
+    public static void printArray(int[] array) {
+        if (array == null || array.length == 0) {
+            System.out.printf("Ошибка: передан недопустимый массив (%s)%n%n", Arrays.toString(array));
+        } else {
+            System.out.printf("%s%n%n", Arrays.toString(array));
+        }
+    }
+
+    public static void drawTriangle(char[] characters) {
         if (characters == null) return;
         StringBuilder triangle = new StringBuilder();
         int len = characters.length;
@@ -87,14 +92,6 @@ public class Console {
         }
         System.out.println(triangle);
     }
-
-    public static void printArray(int[] array) {
-        if (array == null || array.length == 0) {
-            System.out.printf("Ошибка: передан недопустимый массив (%s)%n%n", Arrays.toString(array));
-        } else {
-            System.out.printf("%s%n%n", Arrays.toString(array));
-        }
-    }
 }
 
 /*  TODO придумать что-то с информационным выводом на консоль
@@ -103,7 +100,7 @@ public class Console {
 System.out.printf("   До реверса: %s%n", Arrays.toString(sourceValues));
 System.out.printf("После реверса: %s%n%n", Arrays.toString(printArray));
 
-====== printValuesByTwoLines ======
+====== printTwoLines ======
 System.out.println("Исходный массив:");
 System.out.println(arrayToString(sourceValues));
 System.out.printf("Значение по индексу (%d): ", thresholdValueIndex);
