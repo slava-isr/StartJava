@@ -3,7 +3,10 @@ package com.startjava.lesson_2_3_4.array;
 import java.util.Random;
 
 public class Arrays {
+
     public static int resetCounter;
+
+    private Arrays() {}
 
     public static char[] sortCharacters(char start, char end, boolean ascending) {
         if (start > end) {

@@ -6,6 +6,7 @@ public class Main {
         System.out.println("============================== 1. Реверс значений массива ==============================");
         int[][] sourceIntValues = {{}, null, {6, 8, 9, 1}, {13, 8, 5, 3, 2, 1, 1}};
         for (int[] sourceValues : sourceIntValues) {
+            Console.printArrayInfo(sourceValues);
             Console.printArray(Arrays.reverse(sourceValues));
         }
 
@@ -19,6 +20,7 @@ public class Main {
         int[] thresholdValueIndexes = {-1, 15, 0, 14};
         for (int index : thresholdValueIndexes) {
             float[] sourceValues = Arrays.createRandomValues(15);
+            Console.printTwoLinesInfo(sourceValues, index);
             Console.printTwoLines(Arrays.resetValues(sourceValues, index), index);
         }
 

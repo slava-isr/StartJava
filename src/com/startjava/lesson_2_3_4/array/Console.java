@@ -4,6 +4,8 @@ import java.util.Arrays;
 
 public class Console {
 
+    private Console() {}
+
     public static void type(String text) throws InterruptedException {
         if (text == null || text.isBlank()) {
             System.out.printf("Ошибка: недопустимая строка (%s)%n%n", text == null ? text : "пусто");
@@ -16,6 +18,16 @@ public class Console {
         System.out.println("\n");
     }
 
+    public static void printTwoLinesInfo(float[] values, int thresholdValueIndex) {
+        if (thresholdValueIndex < 0 || thresholdValueIndex >= values.length) return;
+        System.out.println("Исходный массив:");
+        System.out.print(twoLineArray(values));
+        System.out.printf("Значение по индексу (%d): ", thresholdValueIndex);
+        System.out.printf("%.3f%n%n", values[thresholdValueIndex]);
+        System.out.printf("Обнуленных ячеек: %d%n", com.startjava.lesson_2_3_4.array.Arrays.resetCounter);
+        System.out.println("Измененный массив:");
+    }
+
     public static void printTwoLines(float[] overwrittenValues, int thresholdValueIndex) {
         int len = overwrittenValues.length;
         if (thresholdValueIndex < 0 || thresholdValueIndex >= len) {
@@ -23,13 +35,7 @@ public class Console {
             System.out.printf("%d] (%d)%n%n", len - 1, thresholdValueIndex);
             return;
         }
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < len; i++) {
-            sb.append(String.format("%.3f", overwrittenValues[i])).append("  ");
-            if (i == 7) sb.append("\n");
-        }
-        sb.append("\n");
-        System.out.println(sb);
+        System.out.println(twoLineArray(overwrittenValues));
     }
 
     public static void printMultiline(int[] values, int valuesPerLine) {
@@ -73,6 +79,11 @@ public class Console {
         System.out.println();
     }
 
+    public static void printArrayInfo(int[] array) {
+        System.out.printf("   До реверса: %s%n", Arrays.toString(array));
+        System.out.print("После реверса: ");
+    }
+
     public static void printArray(int[] array) {
         if (array == null || array.length == 0) {
             System.out.printf("Ошибка: передан недопустимый массив (%s)%n%n", Arrays.toString(array));
@@ -92,21 +103,14 @@ public class Console {
         }
         System.out.println(triangle);
     }
+
+    private static String twoLineArray(float[] array) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < array.length; i++) {
+            sb.append(String.format("%.3f", array[i])).append("  ");
+            if (i == 7) sb.append("\n");
+        }
+        sb.append("\n");
+        return sb.toString();
+    }
 }
-
-/*  TODO придумать что-то с информационным выводом на консоль
-
-====== printArray ======
-System.out.printf("   До реверса: %s%n", Arrays.toString(sourceValues));
-System.out.printf("После реверса: %s%n%n", Arrays.toString(printArray));
-
-====== printTwoLines ======
-System.out.println("Исходный массив:");
-System.out.println(arrayToString(sourceValues));
-System.out.printf("Значение по индексу (%d): ", thresholdValueIndex);
-System.out.printf("%.3f%n%n", sourceValues[thresholdValueIndex]);
-System.out.println("Измененный массив:");
-System.out.println(arrayToString(overwrittenValues));
-System.out.printf("Количество обнуленных ячеек: %d%n%n", com.startjava.lesson_2_3_4.array.Arrays.resetCounter);
-
- */
