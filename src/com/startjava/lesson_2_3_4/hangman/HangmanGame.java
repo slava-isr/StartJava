@@ -4,82 +4,49 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class HangmanGame {
-    private final String[] WORDS = {"Клавиатура", "Лестница", "Виселица", "Код", "Мармелад", "Градусник", "Магнитофон"};
-    private int attempts;
-    private String wordMask;
-    private char[] wrongLetters;
-    private char[] correctLetters;
+    private final String[] hangman = {"  │\n──┴────────────", "  │       │\n  │      / \\",
+            "  │      ⎧│⎫", "  │     (x_x)", "  ┌───────┐\n  │       │"};
+    private final String[] words = {"Клавиатура", "Лестница", "Виселица", "Код", "Мармелад", "Градусник", "Магнитофон"};
+    private int attempts = hangman.length;
+    private String hiddenWord;
     private char[] guessedLetters;
+    private StringBuilder wrongLetters;
 
     public void start(Scanner sc) {
-        initializeGame();
-        while (attempts > 0 && !Arrays.equals(correctLetters, guessedLetters)) {
+        initGame();
+        while (attempts > 0 && !hiddenWord.equals(String.valueOf(guessedLetters))) {
             showStats();
             makeMove(sc);
         }
         endGame();
     }
 
-    private void initializeGame() {
-        attempts = 5;
-        correctLetters = WORDS[(int) (Math.random() * WORDS.length)].toUpperCase().toCharArray();
-        guessedLetters = new char[correctLetters.length];
+    private void initGame() {
+        hiddenWord = words[(int) (Math.random() * words.length)].toUpperCase();
+        wrongLetters = new StringBuilder();
+        guessedLetters = new char[hiddenWord.length()];
         Arrays.fill(guessedLetters, '_');
-        wordMask = new String(guessedLetters);
-        wrongLetters = new char[0];
     }
 
     private void showStats() {
-        switch (attempts) {
-            case 0 -> System.out.println("\n" +
-                    "  ┌───────┐\n" +
-                    "  │       │\n" +
-                    "  │     (x_x)\n" +
-                    "  │      ⎧│⎫\n" +
-                    "  │       │\n" +
-                    "  │      / \\\n" +
-                    "  │\n" +
-                    "──┴────────────");
-            case 1 -> System.out.println("\n" +
-                    "  ┌───────┐\n" +
-                    "  │       │\n" +
-                    "  │\n" +
-                    "  │\n" +
-                    "  │\n" +
-                    "  │\n" +
-                    "  │\n" +
-                    "──┴────────────");
-            case 2 -> System.out.println("\n" +
-                    "  ┌───────\n" +
-                    "  │\n" +
-                    "  │\n" +
-                    "  │\n" +
-                    "  │\n" +
-                    "  │\n" +
-                    "  │\n" +
-                    "──┴────────────");
-            case 3 -> System.out.println("\n" +
-                    "  ┌\n" +
-                    "  │\n" +
-                    "  │\n" +
-                    "  │\n" +
-                    "  │\n" +
-                    "  │\n" +
-                    "  │\n" +
-                    "──┴────────────");
-            case 4 -> System.out.println("\n" +
-                    "──┴────────────");
-            default -> System.out.println();
+        System.out.println();
+        for (int i = hangman.length - attempts - 1; i >= 0; i--) {
+            System.out.println(hangman[i]);
         }
         System.out.println("Попыток осталось: " + attempts);
-        System.out.println("Ошибочные буквы: " + Arrays.toString(wrongLetters));
-        System.out.println("Загадано слово из " + wordMask.length() + " букв: " + wordMask);
+        System.out.println("Ошибочные буквы: " + (wrongLetters.isEmpty() ? "пока букв нет" : wrongLetters));
+        System.out.println("Загадано слово из " + hiddenWord.length() + " букв: " + String.valueOf(guessedLetters));
     }
 
     private void makeMove(Scanner sc) {
         char enteredLetter = getValidatedInput(sc);
         boolean isGuessed = updateGuessedLetters(enteredLetter);
-        if (!isGuessed) addWrongLetters(enteredLetter);
+        if (!isGuessed) {
+            attempts--;
+            wrongLetters.append(wrongLetters.isEmpty() ? "" : ", ").append(enteredLetter);
+        } else if (attempts < hangman.length) {
+            attempts++;
+        }
     }
 
     private char getValidatedInput(Scanner sc) {
@@ -90,54 +57,29 @@ public class HangmanGame {
             System.out.println("Можно ввести только одну букву кириллицы!");
             return getValidatedInput(sc);
         }
-        if (isUsedLetter(enteredLetter, wrongLetters) || isUsedLetter(enteredLetter, guessedLetters)) {
+        String usedLetters = String.valueOf(guessedLetters) + wrongLetters.toString();
+        if (usedLetters.contains(String.valueOf(enteredLetter))) {
+            System.out.println("Можно вводить только неиспользованные ранее буквы!");
             return getValidatedInput(sc);
         }
         return enteredLetter;
     }
 
-    private boolean isUsedLetter(char enteredLetter, char[] usedLetters) {
-        for (char usedLetter : usedLetters) {
-            if (usedLetter == enteredLetter) {
-                System.out.println("Можно вводить только неиспользованные ранее буквы!");
-                return true;
-            }
-        }
-        return false;
-    }
-
     private boolean updateGuessedLetters(char enteredLetter) {
         boolean isGuessed = false;
+        char[] correctLetters = hiddenWord.toCharArray();
         for (int i = 0; i < correctLetters.length; i++) {
             if (correctLetters[i] == enteredLetter) {
-                isGuessed = true;
                 guessedLetters[i] = enteredLetter;
-                wordMask = new String(guessedLetters);
+                isGuessed = true;
             }
         }
-        adjustAttempts(isGuessed);
         return isGuessed;
-    }
-
-    private void adjustAttempts(boolean isGuessed) {
-        if (isGuessed && attempts < 5) {
-            attempts++;
-        } else if (!isGuessed) {
-            attempts--;
-        }
-    }
-
-    private void addWrongLetters(char enteredLetter) {
-        wrongLetters = Arrays.copyOf(wrongLetters, wrongLetters.length + 1);
-        wrongLetters[wrongLetters.length - 1] = enteredLetter;
     }
 
     private void endGame() {
         showStats();
-        if (attempts == 0) {
-            System.out.println("\nК сожалению вы проиграли =(");
-        } else {
-            System.out.println("\nПоздравляем, вы отгадали слово!");
-        }
+        if (attempts == 0) System.out.println("\nК сожалению вы проиграли =(");
+        else System.out.println("\nПоздравляем, вы отгадали слово!");
     }
 }

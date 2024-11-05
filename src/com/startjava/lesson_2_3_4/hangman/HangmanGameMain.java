@@ -9,17 +9,16 @@ public class HangmanGameMain {
         Scanner sc = new Scanner(System.in);
         do {
             new HangmanGame().start(sc);
-        } while (promptToContinue(sc));
+        } while (promptToContinue("\nХотите продолжить игру? [yes/no]: ", sc));
         System.out.println("\nДо свидания!");
         sc.close();
     }
 
-    private static boolean promptToContinue(Scanner sc) {
-        String playerAnswer;
-        do {
-            System.out.print("\nХотите продолжить игру? [yes/no]: ");
-            playerAnswer = sc.nextLine().toLowerCase();
-        } while (!"no".equals(playerAnswer) && !"yes".equals(playerAnswer));
-        return "yes".equals(playerAnswer);
+    private static boolean promptToContinue(String message, Scanner sc) {
+        System.out.print(message);
+        String playerAnswer = sc.nextLine().toLowerCase();
+        if ("yes".equals(playerAnswer)) return true;
+        if ("no".equals(playerAnswer)) return false;
+        return promptToContinue("\nВведите корректный ответ [yes / no]: ", sc);
     }
 }
