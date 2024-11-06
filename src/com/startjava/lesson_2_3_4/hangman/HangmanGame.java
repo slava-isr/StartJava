@@ -4,8 +4,16 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class HangmanGame {
-    private final String[] hangman = {"  │\n──┴────────────", "  │       │\n  │      / \\",
-            "  │      ⎧│⎫", "  │     (x_x)", "  ┌───────┐\n  │       │"};
+    private final String[] hangman = {
+            "  ┌───────┐",
+            "  │       │\n" +
+            "  │     (x_x)",
+            "  │      ⎧│⎫",
+            "  │       │\n" +
+            "  │      / \\",
+            "  │\n" +
+            "──┴────────────"
+    };
     private final String[] words = {"Клавиатура", "Лестница", "Виселица", "Код", "Мармелад", "Градусник", "Магнитофон"};
     private int attempts = hangman.length;
     private String hiddenWord;
@@ -28,20 +36,9 @@ public class HangmanGame {
         Arrays.fill(guessedLetters, '_');
     }
 
-    private void showStats() {
-        System.out.println();
-        for (int i = hangman.length - attempts - 1; i >= 0; i--) {
-            System.out.println(hangman[i]);
-        }
-        System.out.println("Попыток осталось: " + attempts);
-        System.out.println("Ошибочные буквы: " + (wrongLetters.isEmpty() ? "пока букв нет" : wrongLetters));
-        System.out.println("Загадано слово из " + hiddenWord.length() + " букв: " + String.valueOf(guessedLetters));
-    }
-
     private void makeMove(Scanner sc) {
         char enteredLetter = getValidatedInput(sc);
-        boolean isGuessed = updateGuessedLetters(enteredLetter);
-        if (!isGuessed) {
+        if (!isGuessed(enteredLetter)) {
             attempts--;
             wrongLetters.append(wrongLetters.isEmpty() ? "" : ", ").append(enteredLetter);
         } else if (attempts < hangman.length) {
@@ -51,9 +48,8 @@ public class HangmanGame {
 
     private char getValidatedInput(Scanner sc) {
         System.out.print("\nВведите букву: ");
-        String input = sc.nextLine().toUpperCase();
-        char enteredLetter = input.charAt(0);
-        if (input.length() != 1 || enteredLetter < 'А' || enteredLetter > 'Я') {
+        char enteredLetter = sc.nextLine().toUpperCase().charAt(0);
+        if (enteredLetter < 'А' || enteredLetter > 'Я') {
             System.out.println("Можно ввести только одну букву кириллицы!");
             return getValidatedInput(sc);
         }
@@ -65,11 +61,11 @@ public class HangmanGame {
         return enteredLetter;
     }
 
-    private boolean updateGuessedLetters(char enteredLetter) {
+    private boolean isGuessed(char enteredLetter) {
         boolean isGuessed = false;
-        char[] correctLetters = hiddenWord.toCharArray();
-        for (int i = 0; i < correctLetters.length; i++) {
-            if (correctLetters[i] == enteredLetter) {
+        char[] rightLetters = hiddenWord.toCharArray();
+        for (int i = 0; i < rightLetters.length; i++) {
+            if (rightLetters[i] == enteredLetter) {
                 guessedLetters[i] = enteredLetter;
                 isGuessed = true;
             }
@@ -79,7 +75,16 @@ public class HangmanGame {
 
     private void endGame() {
         showStats();
-        if (attempts == 0) System.out.println("\nК сожалению вы проиграли =(");
-        else System.out.println("\nПоздравляем, вы отгадали слово!");
+        System.out.println(attempts == 0 ? "\nК сожалению вы проиграли =(" : "\nПоздравляем, вы отгадали слово!");
+    }
+
+    private void showStats() {
+        System.out.println();
+        for (int i = attempts; i < hangman.length; i++) {
+            System.out.println(hangman[i]);
+        }
+        System.out.println("Попыток осталось: " + attempts);
+        System.out.println("Ошибочные буквы: " + wrongLetters);
+        System.out.println("Загадано слово из " + hiddenWord.length() + " букв: " + String.valueOf(guessedLetters));
     }
 }
