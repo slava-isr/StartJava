@@ -75,7 +75,9 @@ public class HangmanGame {
 
     private void endGame() {
         showStats();
-        System.out.println(attempts == 0 ? "\nК сожалению вы проиграли =(" : "\nПоздравляем, вы отгадали слово!");
+        System.out.println(attempts == 0 ?
+                "\nК сожалению вы проиграли, это слово " + hiddenWord :
+                "\nПоздравляем, вы отгадали слово!");
     }
 
     private void showStats() {
