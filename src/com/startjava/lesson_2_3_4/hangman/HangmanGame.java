@@ -5,14 +5,14 @@ import java.util.Scanner;
 
 public class HangmanGame {
     private final String[] hangman = {
-            "  ┌───────┐",
-            "  │       │\n" +
-            "  │     (x_x)",
-            "  │      ⎧│⎫",
-            "  │       │\n" +
-            "  │      / \\",
+            "  ┌─GAME─OVER─┐",
+            "  │           │\n" +
+            "  │         (x_x)",
+            "  │          ⎧│⎫",
+            "  │           │\n" +
+            "  │          / \\",
             "  │\n" +
-            "──┴────────────"
+            "──┴─────────────────"
     };
     private final String[] words = {"Клавиатура", "Лестница", "Виселица", "Код", "Мармелад", "Градусник", "Магнитофон"};
     private int attempts = hangman.length;
@@ -53,8 +53,7 @@ public class HangmanGame {
             System.out.println("Можно ввести только одну букву кириллицы!");
             return getValidatedInput(sc);
         }
-        String usedLetters = String.valueOf(guessedLetters) + wrongLetters.toString();
-        if (usedLetters.contains(String.valueOf(enteredLetter))) {
+        if ((String.valueOf(guessedLetters) + wrongLetters).indexOf(enteredLetter) > 0) {
             System.out.println("Можно вводить только неиспользованные ранее буквы!");
             return getValidatedInput(sc);
         }
