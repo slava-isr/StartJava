@@ -53,7 +53,7 @@ public class HangmanGame {
             System.out.println("Можно ввести только одну букву кириллицы!");
             return getValidatedInput(sc);
         }
-        if ((String.valueOf(guessedLetters) + wrongLetters).indexOf(enteredLetter) > 0) {
+        if (String.valueOf(guessedLetters).indexOf(enteredLetter) > 0 || wrongLetters.indexOf(enteredLetter + "") > 0) {
             System.out.println("Можно вводить только неиспользованные ранее буквы!");
             return getValidatedInput(sc);
         }
