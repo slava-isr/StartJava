@@ -16,7 +16,7 @@ public class HangmanGameMain {
 
     private static boolean promptToContinue(String message, Scanner sc) {
         System.out.print(message);
-        String playerAnswer = sc.nextLine().toLowerCase();
+        String playerAnswer = sc.nextLine().trim().toLowerCase();
         if ("yes".equals(playerAnswer)) return true;
         if ("no".equals(playerAnswer)) return false;
         return promptToContinue("\nВведите корректный ответ [yes / no]: ", sc);
