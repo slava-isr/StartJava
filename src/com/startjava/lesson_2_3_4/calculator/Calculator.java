@@ -1,7 +1,6 @@
 package com.startjava.lesson_2_3_4.calculator;
 
 public class Calculator {
-
     private int firstNumber;
     private int secondNumber;
     private String operator;
@@ -26,14 +25,8 @@ public class Calculator {
         return operator;
     }
 
-    public boolean setOperator(String operator) {
-        return switch (operator) {
-            case "+", "-", "*", "/", "^", "%" -> {
-                this.operator = operator;
-                yield true;
-            }
-            default -> false;
-        };
+    public void setOperator(String operator) {
+        this.operator = operator;
     }
 
     public double calculate() {
@@ -41,32 +34,10 @@ public class Calculator {
             case "+" -> firstNumber + secondNumber;
             case "-" -> firstNumber - secondNumber;
             case "*" -> firstNumber * secondNumber;
-            case "/" -> div();
-            case "%" -> mod();
-            case "^" -> pow();
+            case "/" -> (double) firstNumber / secondNumber;
+            case "%" -> Math.floorMod(firstNumber, secondNumber);
+            case "^" -> Math.pow(firstNumber, secondNumber);
             default -> throw new IllegalStateException("Неизвестный оператор: " + operator);
         };
-    }
-
-    private double div() {
-        isZero();
-        return (double) firstNumber / secondNumber;
-    }
-
-    private double mod() {
-        isZero();
-        return (double) firstNumber % secondNumber;
-    }
-
-    private void isZero() {
-        if (secondNumber == 0) System.out.println("\nОшибка: деление на ноль запрещено");
-    }
-
-    private double pow() {
-        int result = firstNumber;
-        for (int i = 1; i < Math.abs(secondNumber); i++) {
-            result *= firstNumber;
-        }
-        return secondNumber < 0 ? 1. / result : result;
     }
 }
