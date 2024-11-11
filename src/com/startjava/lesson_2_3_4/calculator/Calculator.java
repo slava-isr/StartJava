@@ -5,28 +5,28 @@ public class Calculator {
     private int secondNumber;
     private String operator;
 
-    public int getFirstNumber() {
-        return firstNumber;
+    public boolean isExpressionValid(String input) {
+        String[] expression = input.trim().replaceAll("\\s+", " ").split(" ");
+        if (expression.length != 3) {
+            System.out.println("\nДанный формат выражения не поддерживается.");
+            System.out.println("Для ввода используйте формат \"число оператор число\" через пробел и без кавычек.");
+            System.out.println("Пример: \"21 / 7\" и еще один: \"-9 * 31\".");
+            return false;
+        }
+        String numbersPattern = "^-?\\d+$";
+        if (!expression[0].matches(numbersPattern) || !expression[2].matches(numbersPattern)) {
+            System.out.println("\nДанный формат чисел не поддерживается.");
+            System.out.println("Доступны положительные/отрицательные целые числа.");
+            return false;
+        }
+        operator = expression[1];
+        firstNumber = Integer.parseInt(expression[0]);
+        secondNumber = Integer.parseInt(expression[2]);
+        return true;
     }
 
-    public void setFirstNumber(int firstNumber) {
-        this.firstNumber = firstNumber;
-    }
-
-    public int getSecondNumber() {
-        return secondNumber;
-    }
-
-    public void setSecondNumber(int secondNumber) {
-        this.secondNumber = secondNumber;
-    }
-
-    public String getOperator() {
-        return operator;
-    }
-
-    public void setOperator(String operator) {
-        this.operator = operator;
+    public String getExpression() {
+        return firstNumber + " " + operator + " " + secondNumber;
     }
 
     public double calculate() {
@@ -37,7 +37,9 @@ public class Calculator {
             case "/" -> (double) firstNumber / secondNumber;
             case "%" -> Math.floorMod(firstNumber, secondNumber);
             case "^" -> Math.pow(firstNumber, secondNumber);
-            default -> throw new IllegalStateException("Неизвестный оператор: " + operator);
+            default -> throw new IllegalStateException(
+                    "Операция (" + operator + ") не поддерживается. Доступны следующие операции: +, -, *, /, ^, %."
+            );
         };
     }
 }
