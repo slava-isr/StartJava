@@ -4,21 +4,22 @@ import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class CalculatorTest {
-    private static boolean isCalculated = false;
-    private static boolean isCorrectUserAnswer = true;
 
     public static void main(String[] args) {
         System.out.println("Добро пожаловать в \"Калькулятор-cli\".");
         System.out.println("Будьте внимательны - программа работает только с целыми числами.");
         Calculator calculator = new Calculator();
         Scanner sc = new Scanner(System.in);
-        do {
-            if (!isCalculated) {
+        String userAnswer = "yes";
+        while (!"no".equals(userAnswer)) {
+            if ("yes".equals(userAnswer)) {
                 System.out.print("\nВведите выражение из трех аргументов, например, 2 ^ 10: ");
                 String expression = sc.nextLine().trim().replaceAll("\\s+", " ");
                 printFormattedResult(expression, calculator.calculate(expression));
-            }
-        } while (isContinueCalculate(sc));
+                System.out.print("\nХотите продолжить вычисления? [yes / no]: ");
+            } else System.out.print("\nВведите корректный ответ [yes / no]: ");
+            userAnswer = sc.nextLine().trim().toLowerCase();
+        }
         System.out.println("\nДо свидания!");
         sc.close();
     }
@@ -30,20 +31,5 @@ public class CalculatorTest {
             DecimalFormat df = new DecimalFormat("#.####");
             System.out.printf("%n%s = %s%n", expression, df.format(result));
         }
-        isCalculated = true;
-    }
-
-    private static boolean isContinueCalculate(Scanner sc) {
-        System.out.printf("%n%s [yes / no]: ",
-                isCorrectUserAnswer ? "Хотите продолжить вычисления?" : "Введите корректный ответ");
-        String userAnswer = sc.nextLine().trim().toLowerCase();
-        if ("no".equals(userAnswer)) return false;
-        if ("yes".equals(userAnswer)) {
-            isCalculated = false;
-            isCorrectUserAnswer = true;
-            return true;
-        }
-        isCorrectUserAnswer = false;
-        return true;
     }
 }
