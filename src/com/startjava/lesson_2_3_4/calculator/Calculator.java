@@ -3,38 +3,32 @@ package com.startjava.lesson_2_3_4.calculator;
 public class Calculator {
     private static final int EXPRESSION_PARTS_COUNT = 3;
 
-    public double calculate(String expression) {
+    public static double calculate(String expression) {
         String[] expressionParts = expression.split(" ");
-        if (isExpressionPartsValid(expressionParts)) {
-            String operator = expressionParts[1];
-            int a = Integer.parseInt(expressionParts[0]);
-            int b = Integer.parseInt(expressionParts[2]);
-            return switch (operator) {
-                case "+" -> a + b;
-                case "-" -> a - b;
-                case "*" -> a * b;
-                case "/" -> (double) a / b;
-                case "%" -> Math.floorMod(a, b);
-                case "^" -> Math.pow(a, b);
-                default -> throw new IllegalStateException("Знак (" + operator + ") не поддерживается. " +
-                        "Доступные знаки: +, -, *, /, ^, %.");
-            };
-        }
-        return Double.NaN;
-    }
-
-    private boolean isExpressionPartsValid(String[] expressionParts) {
         if (expressionParts.length != EXPRESSION_PARTS_COUNT) {
-            System.out.println("\nФормат выражения не поддерживается.");
-            System.out.println("Используйте формат \"число оператор число\" через пробел и без кавычек.");
-            return false;
+            throw new InvalidExpressionFormatException("\nНеправильный формат. Введите: число оператор число.");
         }
-        String numbersPattern = "^-?\\d+$";
-        if (!expressionParts[0].matches(numbersPattern) || !expressionParts[2].matches(numbersPattern)) {
-            System.out.println("\nФормат чисел не поддерживается.");
-            System.out.println("Используйте положительные/отрицательные целые числа.");
-            return false;
+        String operator = expressionParts[1];
+        int a;
+        int b;
+        try {
+            a = Integer.parseInt(expressionParts[0]);
+            b = Integer.parseInt(expressionParts[2]);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("\nОшибка: введите целые числа.");
         }
-        return true;
+        if (b == 0 && ("/".equals(operator) || "%".equals(operator))) {
+            throw new ArithmeticException("\nОшибка: деление на ноль.");
+        }
+        return switch (operator) {
+            case "+" -> a + b;
+            case "-" -> a - b;
+            case "*" -> a * b;
+            case "/" -> (double) a / b;
+            case "%" -> Math.floorMod(a, b);
+            case "^" -> Math.pow(a, b);
+            default -> throw new UnsupportedOperatorException("\nОператор \"" + operator + "\" не поддерживается." +
+                    "\nИспользуйте: +, -, *, /, ^, %.");
+        };
     }
 }
