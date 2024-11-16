@@ -7,18 +7,19 @@ public class HangmanGameMain {
     public static void main(String[] args) {
         System.out.println("Добро пожаловать в игру \"Виселица\"");
         Scanner sc = new Scanner(System.in);
-        do {
-            new HangmanGame().start(sc);
-        } while (promptToContinue("\nХотите продолжить игру? [yes/no]: ", sc));
+        String userAnswer = "yes";
+        launchGame(userAnswer, sc);
         System.out.println("\nДо свидания!");
         sc.close();
     }
 
-    private static boolean promptToContinue(String message, Scanner sc) {
-        System.out.print(message);
-        String playerAnswer = sc.nextLine().trim().toLowerCase();
-        if ("yes".equals(playerAnswer)) return true;
-        if ("no".equals(playerAnswer)) return false;
-        return promptToContinue("\nВведите корректный ответ [yes / no]: ", sc);
+    private static void launchGame(String userAnswer, Scanner sc) {
+        while (!"no".equals(userAnswer)) {
+            if ("yes".equals(userAnswer)) {
+                new HangmanGame().start(sc);
+                System.out.print("\nХотите продолжить игру? [yes / no]: ");
+            } else System.out.print("\nВведите корректный ответ [yes / no]: ");
+            userAnswer = sc.nextLine().trim().toLowerCase();
+        }
     }
 }
