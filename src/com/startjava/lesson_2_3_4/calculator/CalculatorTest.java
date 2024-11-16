@@ -22,7 +22,7 @@ public class CalculatorTest {
                 String expression = sc.nextLine().trim().replaceAll("\\s+", " ");
                 try {
                     printFormattedResult(expression, Calculator.calculate(expression));
-                } catch (Exception e) {
+                } catch (RuntimeException e) {
                     System.out.println(e.getMessage());
                 }
                 System.out.print("\nХотите продолжить вычисления? [yes / no]: ");
