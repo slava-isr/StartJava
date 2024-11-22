@@ -4,27 +4,27 @@ import java.util.Scanner;
 
 public class GuessNumberTest {
 
-    private static String playerAnswer;
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Введите имя первого игрока: ");
         Player firstPlayer = new Player(sc.nextLine());
         System.out.print("Введите имя второго игрока: ");
         Player secondPlayer = new Player(sc.nextLine());
-        GuessNumber game = new GuessNumber(firstPlayer, secondPlayer, 1, 100);
-        do {
-            game.start(sc);
-            inputPlayerAnswer(sc);
-        } while ("yes".equals(playerAnswer));
-        System.out.println("До свидания!");
+        System.out.print("Введите имя третьего игрока: ");
+        Player thirdPlayer = new Player(sc.nextLine());
+        String playerAnswer = "yes";
+        launchGame(playerAnswer, sc, firstPlayer, secondPlayer, thirdPlayer);
+        System.out.println("\nДо свидания!");
         sc.close();
     }
 
-    private static void inputPlayerAnswer(Scanner sc) {
-        do {
-            System.out.print("Хотите продолжить игру? [yes/no]: ");
-            playerAnswer = sc.next().toLowerCase();
-        } while (!"no".equals(playerAnswer) && !"yes".equals(playerAnswer));
+    private static void launchGame(String playerAnswer, Scanner sc, Player... players) {
+        while (!"no".equals(playerAnswer)) {
+            if ("yes".equals(playerAnswer)) {
+                new GuessNumber(players, 1, 100).start(sc);
+                System.out.print("\nХотите продолжить игру? [yes / no]: ");
+            } else System.out.print("\nВведите корректный ответ [yes / no]: ");
+            playerAnswer = sc.nextLine().trim().toLowerCase();
+        }
     }
 }
