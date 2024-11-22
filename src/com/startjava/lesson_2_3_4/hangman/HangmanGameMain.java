@@ -7,8 +7,8 @@ public class HangmanGameMain {
     public static void main(String[] args) {
         System.out.println("Добро пожаловать в игру \"Виселица\"");
         Scanner sc = new Scanner(System.in);
-        String userAnswer = "yes";
-        launchGame(userAnswer, sc);
+        String playerAnswer = "yes";
+        launchGame(playerAnswer, sc);
         System.out.println("\nДо свидания!");
         sc.close();
     }
