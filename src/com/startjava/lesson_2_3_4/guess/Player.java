@@ -16,15 +16,6 @@ public class Player {
         return Arrays.copyOf(numbers, numbersCount);
     }
 
-    public boolean setNumbers(int number) {
-        if (Arrays.stream(getNumbers()).anyMatch(n -> n == number)) {
-            System.out.printf("Число %d уже использовалось.%n%nПопробуйте еще раз: ", number);
-            return false;
-        }
-        numbers[numbersCount++] = number;
-        return true;
-    }
-
     public String getName() {
         return name;
     }
@@ -33,7 +24,21 @@ public class Player {
         return winCount;
     }
 
-    public void setWinCount() {
+    public boolean addNumber(int number, int rangeFrom, int rangeTo) {
+        if (Arrays.stream(getNumbers()).anyMatch(n -> n == number)) {
+            System.out.printf("Число %d уже использовалось.%n%nПопробуйте еще раз: ", number);
+            return false;
+        }
+        if (number < rangeFrom || number > rangeTo) {
+            System.out.printf("Число должно входить в отрезок [%d, %d].%n%nПопробуйте еще раз: ",
+                    rangeFrom, rangeTo);
+            return false;
+        }
+        numbers[numbersCount++] = number;
+        return true;
+    }
+
+    public void increaseWinCount() {
         winCount++;
     }
 

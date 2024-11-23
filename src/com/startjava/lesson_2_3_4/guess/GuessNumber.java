@@ -1,6 +1,7 @@
 package com.startjava.lesson_2_3_4.guess;
 
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 
 public class GuessNumber {
@@ -27,13 +28,11 @@ public class GuessNumber {
                 System.out.printf("%n%n--== %d-Й РАУНД | %d-Я ПОПЫТКА ==--", round, attempt);
                 for (Player player : players) {
                     System.out.printf("%n%nОтвечает %s: ", player.getName());
-                    if (isGuess(player, sc, attempt)) {
+                    if (isGuessed(player, sc, attempt)) {
                         hasWinner = true;
                         break;
                     }
-                    if (attempt == MAX_ATTEMPTS) {
-                        System.out.printf("%n%nУ %s закончились попытки!", player.getName());
-                    }
+                    isMaxAttempt(attempt, player);
                 }
                 if (hasWinner || (attempt == MAX_ATTEMPTS)) printStats(round);
             }
@@ -51,35 +50,38 @@ public class GuessNumber {
     }
 
     private void generateGuessNumber() {
-        guessNumber = rangeFrom + (int) (Math.random() * (rangeTo - rangeFrom + 1));
+        guessNumber = new Random().nextInt((rangeTo - rangeFrom) + 1) + rangeFrom;
         System.out.printf("%n%nЗагадано число в отрезке [%d, %d]", rangeFrom, rangeTo);
     }
 
-    private boolean isGuess(Player player, Scanner sc, int attempt) {
-        int enteredNumber;
+    private boolean isGuessed(Player player, Scanner sc, int attempt) {
         while (true) {
-            try {
-                enteredNumber = Integer.parseInt(sc.nextLine());
-            } catch (NumberFormatException e) {
-                System.out.printf("Можно ввести только целое число в отрезке [%d, %d].%n%nПопробуйте еще раз: ",
-                        rangeFrom, rangeTo);
-                continue;
-            }
-            if (enteredNumber < rangeFrom || enteredNumber > rangeTo) {
-                System.out.printf("Число должно входить в отрезок [%d, %d].%n%nПопробуйте еще раз: ",
-                        rangeFrom, rangeTo);
-                continue;
-            }
-            if (player.setNumbers(enteredNumber)) {
+            int enteredNumber = enterNumber(sc);
+            if (player.addNumber(enteredNumber, rangeFrom, rangeTo)) {
                 if (enteredNumber == guessNumber) {
                     System.out.printf("%n%s угадал число %d с %d-й попытки", player.getName(), guessNumber, attempt);
-                    player.setWinCount();
+                    player.increaseWinCount();
                     return true;
                 }
                 System.out.printf("Ваше число %s загаданного", (enteredNumber > guessNumber ? "больше" : "меньше"));
                 return false;
             }
         }
+    }
+
+    private int enterNumber(Scanner sc) {
+        while (true) {
+            try {
+                return Integer.parseInt(sc.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.printf("Можно ввести только целое число в отрезке [%d, %d].%n%nПопробуйте еще раз: ",
+                        rangeFrom, rangeTo);
+            }
+        }
+    }
+
+    private void isMaxAttempt(int attempt, Player player) {
+        if (attempt == MAX_ATTEMPTS) System.out.printf("%n%nУ %s закончились попытки!", player.getName());
     }
 
     private void printStats(int round) {
@@ -89,28 +91,30 @@ public class GuessNumber {
                     player.getName(), Arrays.toString(player.getNumbers()).replaceAll("[\\[\\],]", ""));
             player.clearNumbers();
         }
-        if (round == MAX_ROUNDS) {
-            String winnerName = players[0].getName();
-            int winCount = players[0].getWinCount();
-            boolean isDraw = false;
-            for (int i = 1; i < players.length; i++) {
-                if (players[i].getWinCount() > winCount) {
-                    winnerName = players[i].getName();
-                    winCount = players[i].getWinCount();
-                    isDraw = false;
-                } else if (players[i].getWinCount() == winCount) {
-                    winnerName = String.format("%s и %s", winnerName, players[i].getName());
-                    isDraw = true;
-                }
+        if (round == MAX_ROUNDS) determineWinner();
+    }
+
+    private void determineWinner() {
+        String winnerName = players[0].getName();
+        int winCount = players[0].getWinCount();
+        boolean isDraw = false;
+        for (int i = 1; i < players.length; i++) {
+            if (players[i].getWinCount() > winCount) {
+                winnerName = players[i].getName();
+                winCount = players[i].getWinCount();
+                isDraw = false;
+            } else if (players[i].getWinCount() == winCount) {
+                winnerName = String.format("%s и %s", winnerName, players[i].getName());
+                isDraw = true;
             }
-            System.out.printf("%n%n<-<-<- ИГРА ОКОНЧЕНА ->->->");
-            if (isDraw) {
-                System.out.printf("%n%n%s%n", winCount > 0 ?
-                        "У " + winnerName + " ничья с результатом " + winCount :
-                        "Победителей нет, никто не смог отгадать число");
-            } else {
-                System.out.printf("%n%nПобедитель - %s с результатом %d%n", winnerName, winCount);
-            }
+        }
+        System.out.printf("%n%n<-<-<- ИГРА ОКОНЧЕНА ->->->");
+        if (isDraw) {
+            System.out.printf("%n%n%s%n", winCount > 0 ?
+                    "У " + winnerName + " ничья с результатом " + winCount :
+                    "Победителей нет, никто не смог отгадать число");
+        } else {
+            System.out.printf("%n%nПобедитель - %s с результатом %d%n", winnerName, winCount);
         }
     }
 }
