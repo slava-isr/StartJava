@@ -32,7 +32,7 @@ public class GuessNumber {
                         hasWinner = true;
                         break;
                     }
-                    isMaxAttempt(attempt, player);
+                    maxAttempt(attempt, player);
                 }
                 if (hasWinner || (attempt == MAX_ATTEMPTS)) printStats(round);
             }
@@ -50,7 +50,7 @@ public class GuessNumber {
     }
 
     private void generateGuessNumber() {
-        guessNumber = new Random().nextInt((rangeTo - rangeFrom) + 1) + rangeFrom;
+        guessNumber = new Random().nextInt(rangeFrom, rangeTo + 1);
         System.out.printf("%n%nЗагадано число в отрезке [%d, %d]", rangeFrom, rangeTo);
     }
 
@@ -80,7 +80,7 @@ public class GuessNumber {
         }
     }
 
-    private void isMaxAttempt(int attempt, Player player) {
+    private void maxAttempt(int attempt, Player player) {
         if (attempt == MAX_ATTEMPTS) System.out.printf("%n%nУ %s закончились попытки!", player.getName());
     }
 
